@@ -1,7 +1,306 @@
 <!DOCTYPE html>
-<html>
-<head><meta charset="UTF-8"><title>juuvo</title></head>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JUUVO</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=Syne:wght@400;600;800&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0a0a0a;
+      --surface: #111111;
+      --border: #1e1e1e;
+      --accent: #ffffff;
+      --text: #f0f0f0;
+      --muted: #555;
+      --muted2: #333;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'DM Mono', monospace;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow-x: hidden;
+    }
+
+    /* Subtle grid background */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(var(--border) 1px, transparent 1px),
+        linear-gradient(90deg, var(--border) 1px, transparent 1px);
+      background-size: 48px 48px;
+      opacity: 0.4;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    main {
+      position: relative;
+      z-index: 1;
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 80px 32px 120px;
+      flex: 1;
+    }
+
+    /* Header */
+    header {
+      margin-bottom: 80px;
+      animation: fadeUp 0.6s ease both;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+    }
+
+    .logo-icon {
+      width: 96px;
+      height: 96px;
+      flex-shrink: 0;
+    }
+
+    .logo-icon svg {
+      width: 100%;
+      height: 100%;
+    }
+
+    .logo-text {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: clamp(48px, 10vw, 80px);
+      letter-spacing: -0.03em;
+      line-height: 1;
+      color: var(--text);
+    }
+
+    .logo span {
+      color: var(--accent);
+    }
+
+    .tagline {
+      margin-top: 16px;
+      font-size: 12px;
+      color: var(--muted);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+    }
+
+    /* Section label */
+    .section-label {
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 24px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      animation: fadeUp 0.6s 0.1s ease both;
+    }
+
+    .section-label::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+
+    /* App cards */
+    .apps {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .app-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: 28px 32px;
+      display: grid;
+      grid-template-columns: 52px 1fr auto;
+      align-items: center;
+      gap: 20px;
+      text-decoration: none;
+      color: inherit;
+      transition: border-color 0.2s, background 0.2s;
+      position: relative;
+      overflow: hidden;
+      animation: fadeUp 0.6s ease both;
+    }
+
+    .app-card:nth-child(1) { animation-delay: 0.15s; border-radius: 12px 12px 2px 2px; }
+    .app-card:nth-child(2) { animation-delay: 0.2s; border-radius: 2px; }
+    .app-card:nth-child(3) { animation-delay: 0.25s; border-radius: 2px 2px 12px 12px; }
+
+    .app-card::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 3px;
+      background: var(--accent);
+      transform: scaleY(0);
+      transform-origin: bottom;
+      transition: transform 0.25s ease;
+    }
+
+    .app-card:hover {
+      border-color: #2a2a2a;
+      background: #141414;
+    }
+
+    .app-card:hover::before {
+      transform: scaleY(1);
+    }
+
+    .app-icon {
+      width: 52px;
+      height: 52px;
+      border-radius: 12px;
+      background: var(--muted2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      flex-shrink: 0;
+      overflow: hidden;
+    }
+
+    .app-icon img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .app-info {
+      min-width: 0;
+    }
+
+    .app-name {
+      font-family: 'DM Mono', monospace;
+      font-weight: 500;
+      font-size: 14px;
+      letter-spacing: 0;
+      color: #ffffff;
+    }
+
+    .app-desc {
+      margin-top: 4px;
+      font-size: 12px;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    .app-badge {
+      font-size: 10px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 4px 10px;
+      border-radius: 4px;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .badge-live {
+      background: rgba(255,255,255,0.08);
+      color: #ffffff;
+      border: 1px solid rgba(255,255,255,0.2);
+    }
+
+    .badge-soon {
+      background: rgba(255,255,255,0.04);
+      color: var(--muted);
+      border: 1px solid var(--border);
+    }
+
+    /* Footer */
+    footer {
+      position: relative;
+      z-index: 1;
+      padding: 32px;
+      text-align: center;
+      font-size: 11px;
+      color: var(--muted);
+      letter-spacing: 0.1em;
+      border-top: 1px solid var(--border);
+    }
+
+    /* Animations */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(16px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Responsive */
+    @media (max-width: 480px) {
+      main { padding: 56px 20px 80px; }
+      .app-card { grid-template-columns: 44px 1fr; padding: 20px; }
+      .app-badge { display: none; }
+      .app-icon { width: 44px; height: 44px; }
+    }
+  </style>
+</head>
 <body>
-<h1>juuvo</h1>
-</body>
-</html>
+  <main>
+    <header>
+      <div class="logo">
+        <div class="logo-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 1080">
+            <path fill="#fff" d="M907.59,328.97l148.12,148.12c8.19,8.19,5.95,22-4.41,27.19l-9.88,4.94c-82.89,41.45-183,25.2-248.53-40.33h0c-38.43-38.43-90.54-60.01-144.89-60.01h0c-54.34,0-106.46,21.59-144.89,60.01h0c-65.53,65.53-165.64,81.78-248.53,40.33l-9.88-4.94c-10.36-5.18-12.6-18.99-4.41-27.19l148.12-148.12c3.18-3.18,7.5-4.97,12-4.97h495.18c4.5,0,8.82,1.79,12,4.97Z"/>
+            <path fill="#fff" d="M172.41,751.03L24.29,602.91c-8.19-8.19-5.95-22,4.41-27.19l9.88-4.94c82.89-41.45,183-25.2,248.53,40.33h0c38.43,38.43,90.54,60.01,144.89,60.01h0c54.34,0,106.46-21.59,144.89-60.01h0c65.53-65.53,165.64-81.78,248.53-40.33l9.88,4.94c10.36,5.18,12.6,18.99,4.41,27.19l-148.12,148.12c-3.18,3.18-7.5,4.97-12,4.97H184.41c-4.5,0-8.82-1.79-12-4.97Z"/>
+          </svg>
+        </div>
+        <div class="logo-text">JUUVO</div>
+      </div>
+      <p class="tagline">Independent App Developer · Tokyo</p>
+    </header>
+
+    <div class="section-label">Apps</div>
+
+    <div class="apps">
+      <a class="app-card" href="https://apps.apple.com/us/app/topik%E9%9F%93%E5%9B%BD%E8%AA%9E%E5%8D%98%E8%AA%9E%E5%B8%B38000/id6760393514" target="_blank" rel="noopener">
+        <div class="app-icon"><img src="/topik8000/icon.png" alt="TOPIK icon"></div>
+        <div class="app-info">
+          <div class="app-name">TOPIK 韓国語単語帳 8000</div>
+          <div class="app-desc">TOPIK合格に必要な韓国語単語8,000語を収録。ネイティブ音声付き。</div>
+        </div>
+        <span class="app-badge badge-live">iOS</span>
+      </a>
+
+      <a class="app-card" href="https://draft-shogi-online.web.app/" target="_blank" rel="noopener">
+        <div class="app-icon"></div>
+        <div class="app-info">
+          <div class="app-name">ドラフト将棋オンライン</div>
+          <div class="app-desc">ドラフト形式で駒を選んで戦う新感覚の将棋。</div>
+        </div>
+        <span class="app-badge badge-live">Web</span>
+      </a>
+
+      <a class="app-card" href="#" style="pointer-events:none; opacity:0.4;">
+        <div class="app-icon"></div>
+        <div class="app-info">
+          <div class="app-name">Zandaka</div>
+          <div class="app-desc">確定した収支から「本当に使えるお金」を把握するアプリ。</div>
+        </div>
+        <span class="app-badge badge-soon">Coming Soon</span>
+      </a>
+    </div>
+  </main>
+
+  <footer>
+    © 2025 JUUVO · <a href="/cdn-cgi/l/email-protection#8fece0e1fbeeecfbcfe5fafaf9e0a1eeffff" style="color:inherit;"><span clas
