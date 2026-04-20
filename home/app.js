@@ -64,6 +64,16 @@
   window.__lenis = lenis;
 })();
 
+// Switch topbar color when scrolling into light area
+(() => {
+  const lightArea = document.querySelector('.light-area');
+  if (!lightArea) return;
+  const io = new IntersectionObserver((entries) => {
+    document.body.classList.toggle('on-light', entries[0].isIntersecting);
+  }, { rootMargin: '-60px 0px -100% 0px' });
+  io.observe(lightArea);
+})();
+
 // Reveal on scroll into view
 (() => {
   const els = document.querySelectorAll('.reveal');

@@ -103,8 +103,10 @@ body {
   pointer-events: auto;
   color: #fff;
   text-decoration: none;
-  mix-blend-mode: difference;
+  transition: color 0.3s ease;
 }
+
+body.on-light .topbar-brand { color: var(--light-text); }
 
 .topbar-brand-icon {
   width: 22px;
@@ -127,7 +129,6 @@ body {
   right: 28px;
   z-index: 200;
   pointer-events: auto;
-  mix-blend-mode: difference;
   color: #fff;
   width: 44px;
   height: 44px;
@@ -140,7 +141,11 @@ body {
   align-items: center;
   gap: 6px;
   padding: 0;
+  transition: color 0.3s ease;
 }
+
+body.on-light .menu-btn { color: var(--light-text); }
+body.menu-open .menu-btn { color: #fff; }
 
 .menu-btn span {
   display: block;
