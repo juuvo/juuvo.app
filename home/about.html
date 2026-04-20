@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="icon" type="image/png" href="favicon.png">
+  <link rel="apple-touch-icon" href="favicon.png">
+  <title>About — JUUVO</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=Syne:wght@400;600;800&family=Noto+Serif+JP:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    /* === About content === */
+    main.about-main {
+      max-width: 960px;
+      padding: 120px 40px 120px;
+    }
+
+    .about-section {
+      padding: 64px 0;
+      border-top: 1px solid var(--light-border);
+    }
+
+    .about-section:first-child {
+      padding-top: 0;
+      border-top: none;
+    }
+
+    /* Profile (2-column) */
+    .profile {
+      display: grid;
+      grid-template-columns: minmax(200px, 280px) 1fr;
+      gap: 56px;
+      align-items: start;
+    }
+
+    .profile-photo {
+      aspect-ratio: 3 / 4;
+      background: var(--light-surface-2);
+      border: 1px solid var(--light-border);
+      border-radius: 4px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .profile-photo::after {
+      content: 'Photo';
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--light-muted);
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+    }
+
+    .profile-role {
+      font-family: var(--font-display);
+      font-weight: 400;
+      font-size: 11px;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--light-muted);
+      margin-bottom: 16px;
+    }
+
+    .profile-name {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      margin-bottom: 32px;
+    }
+
+    .profile-name-jp {
+      font-family: var(--font-jp);
+      font-weight: 400;
+      font-size: clamp(28px, 3.4vw, 44px);
+      letter-spacing: 0.08em;
+      color: var(--light-text);
+      line-height: 1.2;
+    }
+
+    .profile-name-en {
+      font-family: var(--font-display);
+      font-weight: 500;
+      font-size: clamp(12px, 1.2vw, 14px);
+      letter-spacing: 0.3em;
+      color: var(--light-muted);
+    }
+
+    .profile-bio {
+      font-family: var(--font-jp);
+      font-weight: 300;
+      font-size: clamp(14px, 1.4vw, 16px);
+      line-height: 2;
+      letter-spacing: 0.04em;
+      color: var(--light-text);
+    }
+
+    /* Section heading */
+    .section-heading {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      margin-bottom: 40px;
+    }
+
+    .section-heading-num {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--light-muted);
+      letter-spacing: 0.2em;
+    }
+
+    .section-heading-en {
+      font-family: var(--font-display);
+      font-weight: 600;
+      font-size: clamp(24px, 3vw, 40px);
+      letter-spacing: -0.02em;
+      color: var(--light-text);
+    }
+
+    .section-body {
+      font-family: var(--font-jp);
+      font-weight: 300;
+      font-size: clamp(14px, 1.4vw, 16px);
+      line-height: 2.1;
+      letter-spacing: 0.04em;
+      color: var(--light-text);
+      max-width: 640px;
+    }
+
+    .section-body p + p { margin-top: 1.5em; }
+
+    /* Info table */
+    .info-list {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .info-row {
+      display: grid;
+      grid-template-columns: 140px 1fr;
+      gap: 20px;
+      padding: 16px 0;
+      border-bottom: 1px solid var(--light-border);
+      align-items: center;
+    }
+
+    .info-row:last-child { border-bottom: none; }
+
+    .info-row dt {
+      font-family: var(--font-display);
+      font-weight: 400;
+      font-size: 11px;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--light-muted);
+    }
+
+    .info-row dd {
+      font-family: var(--font-mono);
+      font-size: 14px;
+      color: var(--light-text);
+      letter-spacing: 0.02em;
+    }
+
+    .info-row dd a {
+      color: inherit;
+      text-decoration: none;
+      border-bottom: 1px solid var(--light-border);
+      padding-bottom: 2px;
+      transition: border-color 0.2s;
+    }
+
+    .info-row dd a:hover {
+      border-bottom-color: var(--light-text);
+    }
+
+    @media (max-width: 720px) {
+      .profile {
+        grid-template-columns: 1fr;
+        gap: 32px;
+      }
+
+      .profile-photo {
+        max-width: 240px;
+      }
+
+      .info-row {
+        grid-template-columns: 100px 1fr;
+      }
+
+      main.about-main {
+        padding: 80px 24px 80px;
+      }
+
+      .about-section {
+        padding: 48px 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <a href="index.html" class="topbar-brand">
+      <div class="topbar-brand-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 1080">
+          <path fill="#fff" d="M907.59,328.97l148.12,148.12c8.19,8.19,5.95,22-4.41,27.19l-9.88,4.94c-82.89,41.45-183,25.2-248.53-40.33h0c-38.43-38.43-90.54-60.01-144.89-60.01h0c-54.34,0-106.46,21.59-144.89,60.01h0c-65.53,65.53-165.64,81.78-248.53,40.33l-9.88-4.94c-10.36-5.18-12.6-18.99-4.41-27.19l148.12-148.12c3.18-3.18,7.5-4.97,12-4.97h495.18c4.5,0,8.82,1.79,12,4.97Z"/>
+          <path fill="#fff" d="M172.41,751.03L24.29,602.91c-8.19-8.19-5.95-22,4.41-27.19l9.88-4.94c82.89-41.45,183-25.2,248.53,40.33h0c38.43,38.43,90.54,60.01,144.89,60.01h0c54.34,0,106.46-21.59,144.89-60.01h0c65.53-65.53,165.64-81.78,248.53-40.33l9.88,4.94c10.36,5.18,12.6,18.99,4.41,27.19l-148.12,148.12c-3.18,3.18-7.5,4.97-12,4.97H184.41c-4.5,0-8.82-1.79-12-4.97Z"/>
+        </svg>
+      </div>
+      <span class="topbar-brand-name">JUUVO</span>
+    </a>
+    <button class="menu-btn" aria-label="Toggle menu" aria-expanded="false">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </header>
+
+  <div class="menu-backdrop" aria-hidden="true"></div>
+
+  <nav class="menu-overlay" aria-hidden="true">
+    <div class="menu-nav">
+      <a href="index.html" class="menu-link"><span class="menu-num">01</span>Home</a>
+      <a href="about.html" class="menu-link"><span class="menu-num">02</span>About</a>
+      <a href="apps.html" class="menu-link"><span class="menu-num">03</span>Apps</a>
+      <a href="philosophy.html" class="menu-link"><span class="menu-num">04</span>Philosophy</a>
+      <a href="contact.html" class="menu-link"><span class="menu-num">05</span>Contact</a>
+    </div>
+    <div class="menu-footer">
+      <span>© <span class="menu-year"></span> JUUVO · Tokyo</span>
+    </div>
+  </nav>
+
+  <div class="dark-area">
+    <div class="dark-bg">
+      <div class="hero-bg"></div>
+      <div class="hero-overlay"></div>
+    </div>
+
+    <section class="page-hero">
+      <div class="page-hero-inner">
+        <div class="page-label"><span class="num">02</span><span>About</span></div>
+        <h1 class="page-title">私たちについて</h1>
+      </div>
+    </section>
+  </div>
+
+  <div class="light-area">
+    <main class="about-main">
+      <section class="about-section reveal">
+        <div class="profile">
+          <div class="profile-photo" aria-label="Portrait placeholder"></div>
+          <div class="profile-details">
+            <div class="profile-role">Founder / Developer</div>
+            <h2 class="profile-name">
+              <span class="profile-name-jp">根岸 諄</span>
+              <span class="profile-name-en">NEGISHI JUN</span>
+            </h2>
+            <p class="profile-bio">
+              東京を拠点に、個人事業主としてモバイル・Webアプリケーションの開発事業を営んでいます。<br>
+              企画から設計・実装・運営まで一貫して手がけ、ユーザーの日常に寄り添うプロダクトを生み出すことを仕事にしています。
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section class="about-section reveal">
+        <div class="section-heading">
+          <span class="section-heading-num">01</span>
+          <h2 class="section-heading-en">Background</h2>
+        </div>
+        <div class="section-body">
+          <p>きっかけは、就職活動に向けて UI / UX デザインを学び始めたことでした。制作を重ねるうちに、実際に動き、誰かに届くプロダクトを自分の手で世に出したいという思いが強くなり、この道を選びました。</p>
+          <p>大学の数学科で培ったプログラミングと SQL の知識を土台に、AI を活用しながら、既存のアプリやサービスの UI / UX を見つめ直した新しいプロダクトを作り続けています。</p>
+        </div>
+      </section>
+
+      <section class="about-section reveal">
+        <div class="section-heading">
+          <span class="section-heading-num">02</span>
+          <h2 class="section-heading-en">Info</h2>
+        </div>
+        <dl class="info-list">
+          <div class="info-row">
+            <dt>Name</dt>
+            <dd>根岸 諄 / NEGISHI JUN</dd>
+          </div>
+          <div class="info-row">
+            <dt>Based in</dt>
+            <dd>Tokyo, Japan</dd>
+          </div>
+          <div class="info-row">
+            <dt>Established</dt>
+            <dd>2026</dd>
+          </div>
+          <div class="info-row">
+            <dt>Email</dt>
+            <dd><a href="mailto:contact@juuvo.app">contact@juuvo.app</a></dd>
+          </div>
+        </dl>
+      </section>
+    </main>
+
+    <footer>
+      © <span id="yr"></span> JUUVO
+    </footer>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="icon" type="image/png" href="favicon.png">
+  <link rel="apple-touch-icon" href="favicon.png">
+  <title>Philosophy — JUUVO</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=Syne:wght@400;600;800&family=Noto+Serif+JP:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    main.philosophy-main {
+      max-width: 720px;
+      padding: 120px 40px 120px;
+    }
+
+    .philosophy-intro {
+      max-width: 560px;
+      margin: 0 auto 80px;
+      text-align: center;
+      font-family: var(--font-jp);
+      font-weight: 300;
+      font-size: clamp(15px, 1.6vw, 18px);
+      line-height: 2.2;
+      letter-spacing: 0.06em;
+      color: var(--light-text);
+    }
+
+    .principle {
+      padding: 100px 0;
+      text-align: center;
+      border-top: 1px solid var(--light-border);
+    }
+
+    .principle:first-of-type { border-top: none; padding-top: 40px; }
+    .principle:last-of-type { padding-bottom: 40px; }
+
+    .principle-num {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      font-weight: 400;
+      letter-spacing: 0.3em;
+      color: var(--light-muted);
+      margin-bottom: 40px;
+    }
+
+    .principle-jp {
+      font-family: var(--font-jp);
+      font-weight: 300;
+      font-size: clamp(26px, 4.2vw, 52px);
+      line-height: 1.6;
+      letter-spacing: 0.08em;
+      color: var(--light-text);
+      margin-bottom: 28px;
+      white-space: nowrap;
+    }
+
+    @media (max-width: 560px) {
+      .principle-jp { white-space: normal; }
+    }
+
+    .principle-en {
+      font-family: var(--font-display);
+      font-weight: 400;
+      font-size: clamp(12px, 1.2vw, 14px);
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: var(--light-muted);
+      margin-bottom: 48px;
+    }
+
+    .principle-divider {
+      width: 1px;
+      height: 48px;
+      background: var(--light-border);
+      margin: 0 auto 48px;
+    }
+
+    .principle-text {
+      max-width: 520px;
+      margin: 0 auto;
+      font-family: var(--font-jp);
+      font-weight: 300;
+      font-size: clamp(14px, 1.4vw, 16px);
+      line-height: 2.1;
+      letter-spacing: 0.06em;
+      color: var(--light-text);
+      text-align: left;
+    }
+
+    .closing {
+      padding: 120px 0 40px;
+      text-align: center;
+      border-top: 1px solid var(--light-border);
+    }
+
+    .closing-label {
+      font-family: var(--font-display);
+      font-weight: 400;
+      font-size: 11px;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--light-muted);
+      margin-bottom: 48px;
+    }
+
+    .closing-text {
+      max-width: 580px;
+      margin: 0 auto;
+      font-family: var(--font-jp);
+      font-weight: 300;
+      font-size: clamp(15px, 1.6vw, 18px);
+      line-height: 2.2;
+      letter-spacing: 0.08em;
+      color: var(--light-text);
+    }
+
+    @media (max-width: 720px) {
+      main.philosophy-main { padding: 80px 24px 80px; }
+      .principle { padding: 64px 0; }
+      .principle:first-of-type { padding-top: 24px; }
+      .philosophy-intro { margin-bottom: 48px; }
+      .closing { padding: 80px 0 24px; }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <a href="index.html" class="topbar-brand">
+      <div class="topbar-brand-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 1080">
+          <path fill="#fff" d="M907.59,328.97l148.12,148.12c8.19,8.19,5.95,22-4.41,27.19l-9.88,4.94c-82.89,41.45-183,25.2-248.53-40.33h0c-38.43-38.43-90.54-60.01-144.89-60.01h0c-54.34,0-106.46,21.59-144.89,60.01h0c-65.53,65.53-165.64,81.78-248.53,40.33l-9.88-4.94c-10.36-5.18-12.6-18.99-4.41-27.19l148.12-148.12c3.18-3.18,7.5-4.97,12-4.97h495.18c4.5,0,8.82,1.79,12,4.97Z"/>
+          <path fill="#fff" d="M172.41,751.03L24.29,602.91c-8.19-8.19-5.95-22,4.41-27.19l9.88-4.94c82.89-41.45,183-25.2,248.53,40.33h0c38.43,38.43,90.54,60.01,144.89,60.01h0c54.34,0,106.46-21.59,144.89-60.01h0c65.53-65.53,165.64-81.78,248.53-40.33l9.88,4.94c10.36,5.18,12.6,18.99,4.41,27.19l-148.12,148.12c-3.18,3.18,-7.5,4.97-12,4.97H184.41c-4.5,0-8.82-1.79-12-4.97Z"/>
+        </svg>
+      </div>
+      <span class="topbar-brand-name">JUUVO</span>
+    </a>
+    <button class="menu-btn" aria-label="Toggle menu" aria-expanded="false">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </header>
+
+  <div class="menu-backdrop" aria-hidden="true"></div>
+
+  <nav class="menu-overlay" aria-hidden="true">
+    <div class="menu-nav">
+      <a href="index.html" class="menu-link"><span class="menu-num">01</span>Home</a>
+      <a href="about.html" class="menu-link"><span class="menu-num">02</span>About</a>
+      <a href="apps.html" class="menu-link"><span class="menu-num">03</span>Apps</a>
+      <a href="philosophy.html" class="menu-link"><span class="menu-num">04</span>Philosophy</a>
+      <a href="contact.html" class="menu-link"><span class="menu-num">05</span>Contact</a>
+    </div>
+    <div class="menu-footer">
+      <span>© <span class="menu-year"></span> JUUVO · Tokyo</span>
+    </div>
+  </nav>
+
+  <div class="dark-area">
+    <div class="dark-bg">
+      <div class="hero-bg"></div>
+      <div class="hero-overlay"></div>
+    </div>
+
+    <section class="page-hero">
+      <div class="page-hero-inner">
+        <div class="page-label"><span class="num">04</span><span>Philosophy</span></div>
+        <h1 class="page-title">理念</h1>
+      </div>
+    </section>
+  </div>
+
+  <div class="light-area">
+    <main class="philosophy-main">
+      <p class="philosophy-intro">
+        暮らしの道具でも、遊びの体験でも、身にまとうものでも。<br>
+        使う人にとって本当に価値あるものを作る。<br>
+        その根底にある三つの理念を、ここに記します。
+      </p>
+
+      <section class="principle reveal">
+        <div class="principle-num">01</div>
+        <h2 class="principle-jp">深く見極め、潔く省く。</h2>
+        <div class="principle-en">See deeply, strip bravely.</div>
+        <div class="principle-divider"></div>
+        <p class="principle-text">
+          シンプルにすることそれ自体を、目的にはしません。大切なのは、対象の奥にある本質を深く見極めること。見極めた先には、華やかな表現が必要なこともあれば、潔く削ぎ落とすべきこともある。手段にとらわれず、「魅力を最も際立たせる選択ができているか」を問い続けます。
+        </p>
+      </section>
+
+      <section class="principle reveal">
+        <div class="principle-num">02</div>
+        <h2 class="principle-jp">魅力を、際立たせる。</h2>
+        <div class="principle-en">Let the charm stand out.</div>
+        <div class="principle-divider"></div>
+        <p class="principle-text">
+          削ぎ落とした後に残ったものへ、意識のすべてを注ぎ込みます。シンプルだからこそ、細部の仕上げが体験を決める。色、タイポグラフィ、動き、触感——目に見えないところまで丁寧に磨くことで、プロダクトの輪郭ははじめて際立ちます。
+        </p>
+      </section>
+
+      <section class="principle reveal">
+        <div class="principle-num">03</div>
+        <h2 class="principle-jp">使う人のために。</h2>
+        <div class="principle-en">For those who use it.</div>
+        <div class="principle-divider"></div>
+        <p class="principle-text">
+          つくり手の自己表現ではなく、使う人のために作ること。実用の道具でも、遊びや表現のためのものでも——手にした人の時間を豊かにすること。私たちにとって、最も大切な判断基準です。
+        </p>
+      </section>
+
+      <section class="closing reveal">
+        <div class="closing-label">Closing</div>
+        <p class="closing-text">
+          JUUVO が作るものは、派手に主張するものではありません。<br>
+          手に取ったとき、身につけたとき、使ったとき——<br>
+          静かに「これだ」と思えるもの。<br>
+          流行に左右されず、長く寄り添えるもの。<br>
+          そんな静かな魅力を、あらゆる領域で届けていきます。
+        </p>
+      </section>
+    </main>
+
+    <footer>
+      © <span id="yr"></span> JUUVO
+    </footer>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

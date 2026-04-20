@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="icon" type="image/png" href="favicon.png">
+  <link rel="apple-touch-icon" href="favicon.png">
+  <title>Apps — JUUVO</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=Syne:wght@400;600;800&family=Noto+Serif+JP:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    main.apps-main {
+      max-width: 1120px;
+      padding: 120px 40px 120px;
+    }
+
+    .apps-intro {
+      max-width: 640px;
+      margin: 0 auto 80px;
+      font-family: var(--font-jp);
+      font-weight: 300;
+      font-size: clamp(15px, 1.6vw, 18px);
+      line-height: 2.1;
+      letter-spacing: 0.06em;
+      color: var(--light-text);
+      text-align: center;
+    }
+
+    .app-entry {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      padding: 80px 0;
+      border-top: 1px solid var(--light-border);
+      align-items: center;
+    }
+
+    .app-entry:first-of-type { border-top: none; padding-top: 40px; }
+
+    .app-entry:nth-of-type(even) .app-visual { order: 2; }
+
+    .app-visual {
+      aspect-ratio: 4 / 3;
+      background: linear-gradient(135deg, #f5f5f5, var(--light-surface-2));
+      border: 1px solid var(--light-border);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .app-visual img {
+      width: 42%;
+      height: auto;
+      border-radius: 22%;
+      box-shadow: 0 24px 48px -20px rgba(0, 0, 0, 0.25);
+    }
+
+    .app-visual-fallback {
+      font-family: var(--font-jp);
+      font-weight: 300;
+      font-size: clamp(22px, 2.4vw, 32px);
+      letter-spacing: 0.12em;
+      color: var(--light-muted);
+      text-align: center;
+      padding: 40px;
+    }
+
+    .app-meta-num {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      color: var(--light-muted);
+      margin-bottom: 16px;
+    }
+
+    .app-meta-badges {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 20px;
+    }
+
+    .app-meta-title {
+      font-family: var(--font-jp);
+      font-weight: 400;
+      font-size: clamp(26px, 3.2vw, 42px);
+      letter-spacing: 0.05em;
+      line-height: 1.2;
+      color: var(--light-text);
+      margin-bottom: 24px;
+    }
+
+    .app-meta-desc {
+      font-family: var(--font-jp);
+      font-weight: 300;
+      font-size: clamp(14px, 1.4vw, 16px);
+      line-height: 2;
+      letter-spacing: 0.04em;
+      color: var(--light-text);
+      margin-bottom: 32px;
+      max-width: 480px;
+    }
+
+    .app-meta-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-family: var(--font-display);
+      font-weight: 500;
+      font-size: 12px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--light-text);
+      text-decoration: none;
+      border: 1px solid var(--light-text);
+      padding: 14px 26px;
+      transition: background 0.2s, color 0.2s;
+    }
+
+    .app-meta-link:hover {
+      background: var(--light-text);
+      color: #fff;
+    }
+
+    .app-meta-link .arrow { transition: transform 0.2s; }
+    .app-meta-link:hover .arrow { transform: translateX(4px); }
+
+    .app-entry.is-coming-soon .app-visual {
+      opacity: 0.5;
+    }
+
+    .app-entry.is-coming-soon .app-meta-title,
+    .app-entry.is-coming-soon .app-meta-desc {
+      color: var(--light-muted);
+    }
+
+    /* Badges — restyled for Apps page */
+    .app-badge {
+      font-family: var(--font-display);
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      padding: 5px 12px;
+      border-radius: 4px;
+      white-space: nowrap;
+    }
+
+    .badge-live {
+      background: var(--badge-live-bg);
+      color: var(--light-text);
+      border: 1px solid var(--badge-live-border);
+    }
+
+    .badge-soon {
+      background: transparent;
+      color: var(--light-muted);
+      border: 1px solid var(--light-border);
+    }
+
+    @media (max-width: 720px) {
+      main.apps-main {
+        padding: 80px 24px 80px;
+      }
+
+      .apps-intro {
+        margin-bottom: 48px;
+      }
+
+      .app-entry {
+        grid-template-columns: 1fr;
+        gap: 32px;
+        padding: 56px 0;
+      }
+
+      .app-entry:nth-of-type(even) .app-visual { order: 0; }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <a href="index.html" class="topbar-brand">
+      <div class="topbar-brand-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 1080">
+          <path fill="#fff" d="M907.59,328.97l148.12,148.12c8.19,8.19,5.95,22-4.41,27.19l-9.88,4.94c-82.89,41.45-183,25.2-248.53-40.33h0c-38.43-38.43-90.54-60.01-144.89-60.01h0c-54.34,0-106.46,21.59-144.89,60.01h0c-65.53,65.53-165.64,81.78-248.53,40.33l-9.88-4.94c-10.36-5.18-12.6-18.99-4.41-27.19l148.12-148.12c3.18-3.18,7.5-4.97,12-4.97h495.18c4.5,0,8.82,1.79,12,4.97Z"/>
+          <path fill="#fff" d="M172.41,751.03L24.29,602.91c-8.19-8.19-5.95-22,4.41-27.19l9.88-4.94c82.89-41.45,183-25.2,248.53,40.33h0c38.43,38.43,90.54,60.01,144.89,60.01h0c54.34,0,106.46-21.59,144.89-60.01h0c65.53-65.53,165.64-81.78,248.53-40.33l9.88,4.94c10.36,5.18,12.6,18.99,4.41,27.19l-148.12,148.12c-3.18,3.18-7.5,4.97-12,4.97H184.41c-4.5,0-8.82-1.79-12-4.97Z"/>
+        </svg>
+      </div>
+      <span class="topbar-brand-name">JUUVO</span>
+    </a>
+    <button class="menu-btn" aria-label="Toggle menu" aria-expanded="false">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </header>
+
+  <div class="menu-backdrop" aria-hidden="true"></div>
+
+  <nav class="menu-overlay" aria-hidden="true">
+    <div class="menu-nav">
+      <a href="index.html" class="menu-link"><span class="menu-num">01</span>Home</a>
+      <a href="about.html" class="menu-link"><span class="menu-num">02</span>About</a>
+      <a href="apps.html" class="menu-link"><span class="menu-num">03</span>Apps</a>
+      <a href="philosophy.html" class="menu-link"><span class="menu-num">04</span>Philosophy</a>
+      <a href="contact.html" class="menu-link"><span class="menu-num">05</span>Contact</a>
+    </div>
+    <div class="menu-footer">
+      <span>© <span class="menu-year"></span> JUUVO · Tokyo</span>
+    </div>
+  </nav>
+
+  <div class="dark-area">
+    <div class="dark-bg">
+      <div class="hero-bg"></div>
+      <div class="hero-overlay"></div>
+    </div>
+
+    <section class="page-hero">
+      <div class="page-hero-inner">
+        <div class="page-label"><span class="num">03</span><span>Apps</span></div>
+        <h1 class="page-title">プロダクト一覧</h1>
+      </div>
+    </section>
+  </div>
+
+  <div class="light-area">
+    <main class="apps-main">
+      <p class="apps-intro">
+        語学学習から家計管理まで、<br>
+        日常を静かに豊かにするプロダクトを作っています。
+      </p>
+
+      <article class="app-entry reveal">
+        <div class="app-visual">
+          <img src="icon-topik.png" alt="TOPIK韓国語単語帳8000" onerror="this.style.display='none'; this.parentElement.querySelector('.app-visual-fallback').style.display='block';">
+          <div class="app-visual-fallback" style="display:none;">TOPIK</div>
+        </div>
+        <div class="app-meta">
+          <div class="app-meta-num">01</div>
+          <div class="app-meta-badges">
+            <span class="app-badge badge-live">iOS</span>
+          </div>
+          <h2 class="app-meta-title">TOPIK韓国語単語帳8000</h2>
+          <p class="app-meta-desc">
+            TOPIK（韓国語能力試験）合格に必要な韓国語単語 8,000 語を収録。ネイティブ音声と習熟度管理機能で、効率よく記憶に定着させます。
+          </p>
+          <a class="app-meta-link" href="https://apps.apple.com/us/app/topik%E9%9F%93%E5%9B%BD%E8%AA%9E%E5%8D%98%E8%AA%9E%E5%B8%B38000/id6760393514" target="_blank" rel="noopener">
+            View on App Store <span class="arrow">→</span>
+          </a>
+        </div>
+      </article>
+
+      <article class="app-entry reveal">
+        <div class="app-visual">
+          <img src="icon-draft-shogi.png" alt="ドラフト将棋オンライン" onerror="this.style.display='none'; this.parentElement.querySelector('.app-visual-fallback').style.display='block';">
+          <div class="app-visual-fallback" style="display:none;">ドラフト将棋</div>
+        </div>
+        <div class="app-meta">
+          <div class="app-meta-num">02</div>
+          <div class="app-meta-badges">
+            <span class="app-badge badge-live">Web</span>
+          </div>
+          <h2 class="app-meta-title">ドラフト将棋オンライン</h2>
+          <p class="app-meta-desc">
+            ドラフト形式で駒を選び、対戦相手と駆け引きしながら戦う新感覚の将棋。ブラウザでそのまま遊べて、独自のルールで新たな一局を楽しめます。
+          </p>
+          <a class="app-meta-link" href="https://draft-shogi-online.web.app/" target="_blank" rel="noopener">
+            Play on Web <span class="arrow">→</span>
+          </a>
+        </div>
+      </article>
+
+      <article class="app-entry is-coming-soon reveal">
+        <div class="app-visual">
+          <div class="app-visual-fallback">Zandaka</div>
+        </div>
+        <div class="app-meta">
+          <div class="app-meta-num">03</div>
+          <div class="app-meta-badges">
+            <span class="app-badge badge-soon">Coming Soon</span>
+          </div>
+          <h2 class="app-meta-title">Zandaka</h2>
+          <p class="app-meta-desc">
+            確定した収支から「本当に使えるお金」を把握するアプリ。将来の支出予定を差し引いた残高が可視化され、日々のお金の判断がシンプルになります。
+          </p>
+          <span class="app-meta-link" style="pointer-events:none; opacity:0.4;">
+            In Development <span class="arrow">→</span>
+          </span>
+        </div>
+      </article>
+    </main>
+
+    <footer>
+      © <span id="yr"></span> JUUVO
+    </footer>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

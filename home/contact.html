@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="icon" type="image/png" href="favicon.png">
+  <link rel="apple-touch-icon" href="favicon.png">
+  <title>Contact — JUUVO</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=Syne:wght@400;600;800&family=Noto+Serif+JP:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    main.contact-main {
+      max-width: 720px;
+      padding: 120px 40px 120px;
+    }
+
+    .contact-intro {
+      text-align: center;
+      margin-bottom: 72px;
+      font-family: var(--font-jp);
+      font-weight: 300;
+      font-size: clamp(15px, 1.6vw, 18px);
+      line-height: 2.2;
+      letter-spacing: 0.06em;
+      color: var(--light-text);
+    }
+
+    .contact-cta {
+      text-align: center;
+      padding: 80px 0;
+      margin-bottom: 80px;
+      border-top: 1px solid var(--light-border);
+      border-bottom: 1px solid var(--light-border);
+    }
+
+    .contact-email {
+      display: inline-block;
+      font-family: var(--font-mono);
+      font-weight: 400;
+      font-size: clamp(18px, 2.6vw, 36px);
+      letter-spacing: 0.01em;
+      color: var(--light-text);
+      text-decoration: none;
+      margin-bottom: 40px;
+      transition: opacity 0.2s;
+      max-width: 100%;
+      overflow-wrap: anywhere;
+    }
+
+    .contact-email:hover { opacity: 0.55; }
+
+    .contact-button {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-family: var(--font-display);
+      font-weight: 500;
+      font-size: 12px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: #fff;
+      background: var(--light-text);
+      padding: 16px 32px;
+      text-decoration: none;
+      transition: opacity 0.2s;
+    }
+
+    .contact-button:hover { opacity: 0.85; }
+    .contact-button .arrow { transition: transform 0.2s; }
+    .contact-button:hover .arrow { transform: translateX(4px); }
+
+    @media (max-width: 560px) {
+      main.contact-main { padding: 80px 24px 80px; }
+      .contact-cta { padding: 56px 0 0; margin-bottom: 0; border-bottom: none; }
+      .contact-intro { margin-bottom: 48px; }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <a href="index.html" class="topbar-brand">
+      <div class="topbar-brand-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 1080">
+          <path fill="#fff" d="M907.59,328.97l148.12,148.12c8.19,8.19,5.95,22-4.41,27.19l-9.88,4.94c-82.89,41.45-183,25.2-248.53-40.33h0c-38.43-38.43-90.54-60.01-144.89-60.01h0c-54.34,0-106.46,21.59-144.89,60.01h0c-65.53,65.53-165.64,81.78-248.53,40.33l-9.88-4.94c-10.36-5.18-12.6-18.99-4.41-27.19l148.12-148.12c3.18-3.18,7.5-4.97,12-4.97h495.18c4.5,0,8.82,1.79,12,4.97Z"/>
+          <path fill="#fff" d="M172.41,751.03L24.29,602.91c-8.19-8.19-5.95-22,4.41-27.19l9.88-4.94c82.89-41.45,183-25.2,248.53,40.33h0c38.43,38.43,90.54,60.01,144.89,60.01h0c54.34,0,106.46-21.59,144.89-60.01h0c65.53-65.53,165.64-81.78,248.53-40.33l9.88,4.94c10.36,5.18,12.6,18.99,4.41,27.19l-148.12,148.12c-3.18,3.18-7.5,4.97-12,4.97H184.41c-4.5,0-8.82-1.79-12-4.97Z"/>
+        </svg>
+      </div>
+      <span class="topbar-brand-name">JUUVO</span>
+    </a>
+    <button class="menu-btn" aria-label="Toggle menu" aria-expanded="false">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </header>
+
+  <div class="menu-backdrop" aria-hidden="true"></div>
+
+  <nav class="menu-overlay" aria-hidden="true">
+    <div class="menu-nav">
+      <a href="index.html" class="menu-link"><span class="menu-num">01</span>Home</a>
+      <a href="about.html" class="menu-link"><span class="menu-num">02</span>About</a>
+      <a href="apps.html" class="menu-link"><span class="menu-num">03</span>Apps</a>
+      <a href="philosophy.html" class="menu-link"><span class="menu-num">04</span>Philosophy</a>
+      <a href="contact.html" class="menu-link"><span class="menu-num">05</span>Contact</a>
+    </div>
+    <div class="menu-footer">
+      <span>© <span class="menu-year"></span> JUUVO · Tokyo</span>
+    </div>
+  </nav>
+
+  <div class="dark-area">
+    <div class="dark-bg">
+      <div class="hero-bg"></div>
+      <div class="hero-overlay"></div>
+    </div>
+
+    <section class="page-hero">
+      <div class="page-hero-inner">
+        <div class="page-label"><span class="num">05</span><span>Contact</span></div>
+        <h1 class="page-title">お問い合わせ</h1>
+      </div>
+    </section>
+  </div>
+
+  <div class="light-area">
+    <main class="contact-main">
+      <p class="contact-intro">
+        ご相談・ご依頼・お問い合わせは、<br>
+        下記メールアドレスまでお気軽にご連絡ください。
+      </p>
+
+      <div class="contact-cta reveal">
+        <a href="mailto:contact@juuvo.app" class="contact-email">contact@juuvo.app</a>
+        <br>
+        <a href="mailto:contact@juuvo.app" class="contact-button">
+          Send email <span class="arrow">→</span>
+        </a>
+      </div>
+
+    </main>
+
+    <footer>
+      © <span id="yr"></span> JUUVO
+    </footer>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
