@@ -6,15 +6,14 @@
   document.querySelectorAll(".menu-year").forEach(el => el.textContent = yr);
 })();
 
-// Highlight active menu link
+// Highlight active nav link
 (() => {
-  const path = location.pathname.split('/').pop() || 'index.html';
-  document.querySelectorAll('.menu-link').forEach(a => {
+  const path = location.pathname.split('/').pop() || '';
+  document.querySelectorAll('.topbar-nav a').forEach(a => {
     const href = a.getAttribute('href');
     if (!href || href === '#') return;
-    if (href === path || (path === '' && href === 'index.html')) {
-      a.classList.add('is-active');
-    }
+    const isHome = (href === './' || href === '') && path === '';
+    if (href === path || isHome) a.classList.add('is-active');
   });
 })();
 
@@ -62,6 +61,73 @@
   requestAnimationFrame(raf);
 
   window.__lenis = lenis;
+})();
+
+// Animated plus-grid background in hero
+(() => {
+  const heroBg = document.querySelector('.hero-bg');
+  if (!heroBg) return;
+
+  const canvas = document.createElement('canvas');
+  heroBg.appendChild(canvas);
+  const ctx = canvas.getContext('2d');
+
+  const SPACING = 22;
+  const DOT_RADIUS = 1;
+  const ALPHA_MIN = 0.04;
+  const ALPHA_MAX = 0.36;
+
+  let width = 0, height = 0, dpr = 1, points = [];
+
+  const resize = () => {
+    dpr = window.devicePixelRatio || 1;
+    const rect = heroBg.getBoundingClientRect();
+    width = rect.width;
+    height = rect.height;
+    canvas.width = width * dpr;
+    canvas.height = height * dpr;
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+    points = [];
+    const cols = Math.ceil(width / SPACING) + 1;
+    const rows = Math.ceil(height / SPACING) + 1;
+    const offsetX = (width - (cols - 1) * SPACING) / 2;
+    const offsetY = (height - (rows - 1) * SPACING) / 2;
+    for (let i = 0; i < cols; i++) {
+      for (let j = 0; j < rows; j++) {
+        points.push({ x: offsetX + i * SPACING, y: offsetY + j * SPACING });
+      }
+    }
+  };
+
+  const drawFrame = (t) => {
+    ctx.clearRect(0, 0, width, height);
+    const time = t * 0.0007;
+    const mid = (ALPHA_MIN + ALPHA_MAX) / 2;
+    const range = (ALPHA_MAX - ALPHA_MIN) / 2;
+    for (const p of points) {
+      const wave =
+        Math.sin(p.x * 0.012 + p.y * 0.006 + time) * 0.5 +
+        Math.sin(p.x * 0.005 - p.y * 0.011 + time * 0.7) * 0.5;
+      const alpha = mid + wave * range;
+      ctx.fillStyle = `rgba(255, 255, 255, ${alpha})`;
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, DOT_RADIUS, 0, Math.PI * 2);
+      ctx.fill();
+    }
+  };
+
+  const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  resize();
+  window.addEventListener('resize', resize);
+
+  if (reduced) {
+    drawFrame(0);
+  } else {
+    const loop = (t) => { drawFrame(t); requestAnimationFrame(loop); };
+    requestAnimationFrame(loop);
+  }
 })();
 
 // Switch topbar color when scrolling into light area

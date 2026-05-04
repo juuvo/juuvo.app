@@ -5,19 +5,22 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
   <link rel="icon" type="image/png" href="favicon.png">
-  <link rel="apple-touch-icon" href="favicon.png">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
   <title>JUUVO</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=Syne:wght@400;600;800&family=Noto+Serif+JP:wght@300;400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
   <style>
     /* === Home-specific === */
+    html { scrollbar-gutter: auto; }
+    html, body { overflow: hidden; height: 100vh; height: 100dvh; }
+
     .hero-section {
       position: relative;
       z-index: 1;
-      min-height: 100vh;
-      min-height: 100dvh;
+      height: 100vh;
+      height: 100dvh;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -283,36 +286,17 @@
 </head>
 <body>
   <header class="topbar">
-    <a href="./" class="topbar-brand">
-      <div class="topbar-brand-icon">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 1080">
-          <path fill="currentColor" d="M907.59,328.97l148.12,148.12c8.19,8.19,5.95,22-4.41,27.19l-9.88,4.94c-82.89,41.45-183,25.2-248.53-40.33h0c-38.43-38.43-90.54-60.01-144.89-60.01h0c-54.34,0-106.46,21.59-144.89,60.01h0c-65.53,65.53-165.64,81.78-248.53,40.33l-9.88-4.94c-10.36-5.18-12.6-18.99-4.41-27.19l148.12-148.12c3.18-3.18,7.5-4.97,12-4.97h495.18c4.5,0,8.82,1.79,12,4.97Z"/>
-          <path fill="currentColor" d="M172.41,751.03L24.29,602.91c-8.19-8.19-5.95-22,4.41-27.19l9.88-4.94c82.89-41.45,183-25.2,248.53,40.33h0c38.43,38.43,90.54,60.01,144.89,60.01h0c54.34,0,106.46-21.59,144.89-60.01h0c65.53-65.53,165.64-81.78,248.53-40.33l9.88,4.94c10.36,5.18,12.6,18.99,4.41,27.19l-148.12,148.12c-3.18,3.18-7.5,4.97-12,4.97H184.41c-4.5,0-8.82-1.79-12-4.97Z"/>
-        </svg>
-      </div>
-      <span class="topbar-brand-name">JUUVO</span>
+    <a href="./" class="topbar-brand" aria-label="JUUVO">
+      <span class="topbar-brand-logo"></span>
     </a>
-    <button class="menu-btn" aria-label="Toggle menu" aria-expanded="false">
-      <span></span>
-      <span></span>
-      <span></span>
-    </button>
+    <nav class="topbar-nav">
+      <a href="./">Home</a>
+      <a href="about">About</a>
+      <a href="apps">Apps</a>
+      <a href="philosophy">Philosophy</a>
+      <a href="contact">Contact</a>
+    </nav>
   </header>
-
-  <div class="menu-backdrop" aria-hidden="true"></div>
-
-  <nav class="menu-overlay" aria-hidden="true">
-    <div class="menu-nav">
-      <a href="./" class="menu-link"><span class="menu-num">01</span>Home</a>
-      <a href="about" class="menu-link"><span class="menu-num">02</span>About</a>
-      <a href="apps" class="menu-link"><span class="menu-num">03</span>Apps</a>
-      <a href="philosophy" class="menu-link"><span class="menu-num">04</span>Philosophy</a>
-      <a href="contact" class="menu-link"><span class="menu-num">05</span>Contact</a>
-    </div>
-    <div class="menu-footer">
-      <span>© <span class="menu-year"></span> JUUVO · Tokyo</span>
-    </div>
-  </nav>
 
   <div class="dark-area">
     <div class="dark-bg">
@@ -326,85 +310,9 @@
         <span>Let the charm stand out.</span>
         <span>For those <span class="brush-wrap">who use it<span class="brush-stroke" aria-hidden="true"><svg viewBox="0 0 400 14" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg"><defs><filter id="brushFilter" x="-10%" y="-300%" width="120%" height="700%"><feTurbulence type="fractalNoise" baseFrequency="0.02 0.25" numOctaves="2" seed="6"/><feDisplacementMap in="SourceGraphic" scale="4"/></filter></defs><path d="M9,4 C-1,4 -1,10 9,10 C80,10 220,9 398,7 C220,5 80,4 9,4 Z" fill="#ffffff" filter="url(#brushFilter)"/></svg></span></span>.</span>
       </h1>
-      <div class="scroll-hint">Scroll</div>
-    </section>
-
-    <section class="philosophy-dark">
-      <div class="philosophy-label reveal">Philosophy</div>
-      <div class="philosophy-jp reveal reveal-2">
-        <span>深く見極め、潔く省く。</span>
-        <span>魅力を、際立たせる。</span>
-        <span>使う人のために。</span>
-      </div>
-      <div class="philosophy-divider reveal reveal-3"></div>
-      <div class="philosophy-about reveal reveal-4">
-        <div class="about-label">What we do</div>
-        <p class="about-text">
-          東京を拠点に、モバイル・Webアプリケーションなどの企画・設計・開発・運用までを一貫して手がけています。<br>
-          語学学習、ゲーム、パーソナルファイナンスなど、多岐にわたる領域において、使う人の日常に寄り添うプロダクトを提供しています。
-        </p>
-      </div>
     </section>
   </div>
 
-  <div class="light-area">
-    <main>
-      <div class="section-label">Apps</div>
-      <div class="apps">
-        <a class="app-card" href="https://apps.apple.com/us/app/topik%E9%9F%93%E5%9B%BD%E8%AA%9E%E5%8D%98%E8%AA%9E%E5%B8%B38000/id6760393514" target="_blank" rel="noopener">
-          <div class="app-icon"><img src="icon-topik.png" alt="TOPIK icon"></div>
-          <div class="app-info">
-            <div class="app-name">TOPIK韓国語単語帳8000</div>
-            <div class="app-desc">TOPIK合格に必要な韓国語単語8000語を収録。ネイティブ音声付き。</div>
-          </div>
-          <span class="app-badge badge-live">iOS</span>
-        </a>
-
-        <a class="app-card" href="https://draft-shogi-online.web.app/" target="_blank" rel="noopener">
-          <div class="app-icon"><img src="icon-draft-shogi.png" alt="ドラフト将棋オンライン icon"></div>
-          <div class="app-info">
-            <div class="app-name">ドラフト将棋オンライン</div>
-            <div class="app-desc">ドラフト形式で駒を選んで戦う新感覚の将棋。</div>
-          </div>
-          <span class="app-badge badge-live">Web</span>
-        </a>
-
-        <a class="app-card" href="#" style="pointer-events:none; opacity:0.4;">
-          <div class="app-icon"></div>
-          <div class="app-info">
-            <div class="app-name">Zandaka</div>
-            <div class="app-desc">確定した収支から「本当に使えるお金」を把握するアプリ。</div>
-          </div>
-          <span class="app-badge badge-soon">Coming Soon</span>
-        </a>
-      </div>
-    </main>
-
-    <footer>
-      © <span id="yr"></span> JUUVO
-    </footer>
-  </div>
-
-  <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
   <script src="app.js"></script>
-  <script>
-    // Home-specific: dark-p scroll linker
-    (() => {
-      const root = document.documentElement;
-      const darkArea = document.querySelector('.dark-area');
-      if (!darkArea || !window.__lenis) return;
-
-      const clamp = (v, a = 0, b = 1) => Math.max(a, Math.min(b, v));
-      const update = (scroll) => {
-        const range = darkArea.offsetHeight - window.innerHeight;
-        const p = clamp(scroll / range);
-        root.style.setProperty('--dark-p', p);
-      };
-
-      window.__lenis.on('scroll', ({ scroll }) => update(scroll));
-      update(window.scrollY);
-      window.addEventListener('resize', () => update(window.scrollY));
-    })();
-  </script>
 </body>
 </html>

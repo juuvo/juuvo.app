@@ -1,3 +1,36 @@
+/* === Fonts (self-hosted) === */
+@font-face {
+  font-family: 'Cabinet Grotesk';
+  src: url('fonts/CabinetGrotesk-Variable.woff2') format('woff2-variations');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Geist';
+  src: url('fonts/Geist-Variable.woff2') format('woff2-variations');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Geist Mono';
+  src: url('fonts/GeistMono-Variable.woff2') format('woff2-variations');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Geist Pixel Square';
+  src: url('fonts/GeistPixel-Square.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
 /* === Base === */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -34,9 +67,10 @@ html { scrollbar-gutter: stable; }
   --badge-live-border: rgba(0, 0, 0, 0.12);
 
   /* === Fonts === */
-  --font-display: 'Syne', sans-serif;
+  --font-display: 'Cabinet Grotesk', 'Geist', sans-serif;
   --font-jp: 'Noto Serif JP', serif;
-  --font-mono: 'DM Mono', monospace;
+  --font-mono: 'Geist Mono', monospace;
+  --font-pixel: 'Geist Pixel Square', monospace;
 }
 
 body {
@@ -68,10 +102,16 @@ body {
 .hero-bg {
   position: absolute;
   inset: 0;
-  background: url('20260418_bg_1920_1047.jpg') center center / cover no-repeat;
-  transform: scale(calc(1 + var(--dark-p, 0) * 0.35));
-  transform-origin: 50% 50%;
-  will-change: transform;
+  background: var(--dark-bg);
+  overflow: hidden;
+}
+
+.hero-bg canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
 }
 
 .hero-overlay {
@@ -92,44 +132,60 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 20px 28px;
-  pointer-events: none;
+  padding: 16px 28px;
+  background: var(--dark-bg);
+  border-bottom: 1px solid var(--dark-border);
 }
 
 .topbar-brand {
   display: flex;
   align-items: center;
   gap: 10px;
-  pointer-events: auto;
   color: #fff;
   text-decoration: none;
-  transition: color 0.3s ease;
 }
 
-body.on-light .topbar-brand { color: var(--light-text); }
-
-.topbar-brand-icon {
-  width: 22px;
+.topbar-brand-logo {
+  display: block;
+  width: 90px;
   height: 22px;
+  background-color: currentColor;
+  mask: url('logo.svg') no-repeat center / contain;
+  -webkit-mask: url('logo.svg') no-repeat center / contain;
 }
 
-.topbar-brand-icon svg { width: 100%; height: 100%; }
+.topbar-nav {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+}
 
-.topbar-brand-name {
+.topbar-nav a {
   font-family: var(--font-display);
-  font-weight: 800;
-  font-size: 16px;
-  letter-spacing: -0.02em;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: -0.005em;
+  color: var(--dark-muted-2);
+  text-decoration: none;
+  transition: color 0.15s ease;
+}
+
+.topbar-nav a:hover { color: #fff; }
+
+.topbar-nav a.is-active { color: #fff; }
+
+@media (max-width: 640px) {
+  .topbar-nav { gap: 16px; }
+  .topbar-nav a { font-size: 13px; }
 }
 
 /* === Hamburger button === */
 .menu-btn {
   position: fixed;
-  top: 20px;
+  top: 16px;
   right: 28px;
   z-index: 200;
-  pointer-events: auto;
-  color: #fff;
+  color: var(--light-text);
   width: 44px;
   height: 44px;
   background: transparent;
@@ -144,7 +200,6 @@ body.on-light .topbar-brand { color: var(--light-text); }
   transition: color 0.3s ease;
 }
 
-body.on-light .menu-btn { color: var(--light-text); }
 body.menu-open .menu-btn { color: #fff; }
 
 .menu-btn span {
@@ -237,7 +292,7 @@ body.menu-open .menu-link:nth-child(5) { transition-delay: 0.35s; }
 .menu-link.is-active { color: var(--dark-muted-2); }
 
 .menu-num {
-  font-family: var(--font-mono);
+  font-family: var(--font-pixel);
   font-size: 11px;
   font-weight: 400;
   color: var(--dark-muted-3);
@@ -350,7 +405,7 @@ main {
 }
 
 .page-label .num {
-  font-family: var(--font-mono);
+  font-family: var(--font-pixel);
 }
 
 .page-title {
