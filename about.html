@@ -9,18 +9,18 @@
   <title>About — JUUVO</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+JP:wght@300;400;500;600;700&family=Noto+Serif+JP:wght@300;400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
   <style>
-    /* === About content === */
     main.about-main {
       max-width: 960px;
-      padding: 120px 40px 120px;
+      margin: 0 auto;
+      padding: 96px 32px 120px;
     }
 
     .about-section {
       padding: 64px 0;
-      border-top: 1px solid var(--light-border);
+      border-top: 1px solid var(--color-border);
     }
 
     .about-section:first-child {
@@ -38,9 +38,9 @@
 
     .profile-photo {
       aspect-ratio: 3 / 4;
-      background: var(--light-surface-2);
-      border: 1px solid var(--light-border);
-      border-radius: 4px;
+      background: var(--color-surface-hover);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
       position: relative;
       overflow: hidden;
     }
@@ -52,8 +52,8 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      color: var(--light-muted);
-      font-family: var(--font-mono);
+      color: var(--color-text-muted);
+      font-family: var(--font-body);
       font-size: 11px;
       letter-spacing: 0.2em;
       text-transform: uppercase;
@@ -65,7 +65,7 @@
       font-size: 11px;
       letter-spacing: 0.3em;
       text-transform: uppercase;
-      color: var(--light-muted);
+      color: var(--color-text-muted);
       margin-bottom: 16px;
     }
 
@@ -81,7 +81,7 @@
       font-weight: 400;
       font-size: clamp(28px, 3.4vw, 44px);
       letter-spacing: 0.08em;
-      color: var(--light-text);
+      color: var(--color-text);
       line-height: 1.2;
     }
 
@@ -90,7 +90,7 @@
       font-weight: 500;
       font-size: clamp(12px, 1.2vw, 14px);
       letter-spacing: 0.3em;
-      color: var(--light-muted);
+      color: var(--color-text-muted);
     }
 
     .profile-bio {
@@ -99,7 +99,7 @@
       font-size: clamp(14px, 1.4vw, 16px);
       line-height: 2;
       letter-spacing: 0.04em;
-      color: var(--light-text);
+      color: var(--color-text);
     }
 
     /* Section heading */
@@ -111,18 +111,18 @@
     }
 
     .section-heading-num {
-      font-family: var(--font-mono);
+      font-family: var(--font-pixel);
       font-size: 11px;
-      color: var(--light-muted);
+      color: var(--color-text-muted);
       letter-spacing: 0.2em;
     }
 
     .section-heading-en {
       font-family: var(--font-display);
       font-weight: 600;
-      font-size: clamp(24px, 3vw, 40px);
+      font-size: clamp(24px, 3vw, 36px);
       letter-spacing: -0.02em;
-      color: var(--light-text);
+      color: var(--color-text);
     }
 
     .section-body {
@@ -131,7 +131,7 @@
       font-size: clamp(14px, 1.4vw, 16px);
       line-height: 2.1;
       letter-spacing: 0.04em;
-      color: var(--light-text);
+      color: var(--color-text);
       max-width: 640px;
     }
 
@@ -148,7 +148,7 @@
       grid-template-columns: 140px 1fr;
       gap: 20px;
       padding: 16px 0;
-      border-bottom: 1px solid var(--light-border);
+      border-bottom: 1px solid var(--color-border);
       align-items: center;
     }
 
@@ -160,49 +160,65 @@
       font-size: 11px;
       letter-spacing: 0.25em;
       text-transform: uppercase;
-      color: var(--light-muted);
+      color: var(--color-text-muted);
     }
 
     .info-row dd {
-      font-family: var(--font-mono);
+      font-family: var(--font-body);
       font-size: 14px;
-      color: var(--light-text);
+      color: var(--color-text);
       letter-spacing: 0.02em;
     }
 
     .info-row dd a {
       color: inherit;
       text-decoration: none;
-      border-bottom: 1px solid var(--light-border);
+      border-bottom: 1px solid var(--color-border);
       padding-bottom: 2px;
       transition: border-color 0.2s;
     }
 
     .info-row dd a:hover {
-      border-bottom-color: var(--light-text);
+      border-bottom-color: var(--color-text);
+    }
+
+    /* Toolkit chips */
+    .toolkit-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 28px;
+      list-style: none;
+      padding: 0;
+    }
+
+    .toolkit-list li {
+      font-family: var(--font-display);
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      padding: 6px 14px;
+      border: 1px solid var(--color-border-strong);
+      border-radius: var(--radius-pill);
+      color: var(--color-text-soft);
+      background: var(--color-bg);
+      transition: border-color 0.15s ease, color 0.15s ease;
+    }
+
+    .toolkit-list li:hover {
+      border-color: var(--color-text);
+      color: var(--color-text);
     }
 
     @media (max-width: 720px) {
+      main.about-main { padding: 72px 24px 80px; }
       .profile {
         grid-template-columns: 1fr;
         gap: 32px;
       }
-
-      .profile-photo {
-        max-width: 240px;
-      }
-
-      .info-row {
-        grid-template-columns: 100px 1fr;
-      }
-
-      main.about-main {
-        padding: 80px 24px 80px;
-      }
-
-      .about-section {
-        padding: 48px 0;
-      }
+      .profile-photo { max-width: 240px; }
+      .info-row { grid-template-columns: 100px 1fr; }
+      .about-section { padding: 48px 0; }
     }
   </style>
 </head>
@@ -220,80 +236,127 @@
     </nav>
   </header>
 
-  <div class="dark-area">
-    <div class="dark-bg">
-      <div class="hero-bg"></div>
-      <div class="hero-overlay"></div>
+  <section class="page-hero">
+    <div class="page-hero-inner">
+      <div class="page-label"><span class="num">02</span><span>About</span></div>
+      <h1 class="page-title">私たちについて</h1>
     </div>
+  </section>
 
-    <section class="page-hero">
-      <div class="page-hero-inner">
-        <div class="page-label"><span class="num">02</span><span>About</span></div>
-        <h1 class="page-title">私たちについて</h1>
+  <div class="content-shell">
+    <main class="about-main">
+    <section class="about-section reveal">
+      <div class="profile">
+        <div class="profile-photo" aria-label="Portrait placeholder"></div>
+        <div class="profile-details">
+          <div class="profile-role">Founder / Developer</div>
+          <h2 class="profile-name">
+            <span class="profile-name-jp">根岸 諄</span>
+            <span class="profile-name-en">NEGISHI JUN</span>
+          </h2>
+          <p class="profile-bio">
+            東京を拠点に、個人事業主としてモバイル・Webアプリケーションの開発事業を営んでいます。<br>
+            企画から設計・実装・運営まで一貫して手がけ、ユーザーの日常に寄り添うプロダクトを生み出すことを仕事にしています。
+          </p>
+        </div>
       </div>
     </section>
+
+    <section class="about-section reveal">
+      <div class="section-heading">
+        <span class="section-heading-num">01</span>
+        <h2 class="section-heading-en">Background</h2>
+      </div>
+      <div class="section-body">
+        <p>きっかけは、就職活動に向けて UI / UX デザインを学び始めたことでした。制作を重ねるうちに、実際に動き、誰かに届くプロダクトを自分の手で世に出したいという思いが強くなり、この道を選びました。</p>
+        <p>大学の数学科で培ったプログラミングと SQL の知識を土台に、AI を活用しながら、既存のアプリやサービスの UI / UX を見つめ直した新しいプロダクトを作り続けています。</p>
+      </div>
+    </section>
+
+    <section class="about-section reveal">
+      <div class="section-heading">
+        <span class="section-heading-num">02</span>
+        <h2 class="section-heading-en">Info</h2>
+      </div>
+      <dl class="info-list">
+        <div class="info-row">
+          <dt>Name</dt>
+          <dd>根岸 諄 / NEGISHI JUN</dd>
+        </div>
+        <div class="info-row">
+          <dt>Based in</dt>
+          <dd>Tokyo, Japan</dd>
+        </div>
+        <div class="info-row">
+          <dt>Established</dt>
+          <dd>2026</dd>
+        </div>
+        <div class="info-row">
+          <dt>Email</dt>
+          <dd><a href="mailto:contact@juuvo.app">contact@juuvo.app</a></dd>
+        </div>
+      </dl>
+    </section>
+
+    <section class="about-section reveal">
+      <div class="section-heading">
+        <span class="section-heading-num">03</span>
+        <h2 class="section-heading-en">Toolkit</h2>
+      </div>
+      <div class="section-body">
+        <p>モバイルアプリは React Native + Expo + Firebase、Web は Vanilla HTML/CSS/JS と Next.js で開発しています。デザインには Figma を、開発には AI を取り入れています。</p>
+      </div>
+      <ul class="toolkit-list">
+        <li>React Native</li>
+        <li>Expo</li>
+        <li>Firebase</li>
+        <li>Next.js</li>
+        <li>Vercel</li>
+        <li>TypeScript</li>
+        <li>Vanilla JS</li>
+        <li>Figma</li>
+      </ul>
+    </section>
+  </main>
   </div>
 
-  <div class="light-area">
-    <main class="about-main">
-      <section class="about-section reveal">
-        <div class="profile">
-          <div class="profile-photo" aria-label="Portrait placeholder"></div>
-          <div class="profile-details">
-            <div class="profile-role">Founder / Developer</div>
-            <h2 class="profile-name">
-              <span class="profile-name-jp">根岸 諄</span>
-              <span class="profile-name-en">NEGISHI JUN</span>
-            </h2>
-            <p class="profile-bio">
-              東京を拠点に、個人事業主としてモバイル・Webアプリケーションの開発事業を営んでいます。<br>
-              企画から設計・実装・運営まで一貫して手がけ、ユーザーの日常に寄り添うプロダクトを生み出すことを仕事にしています。
-            </p>
-          </div>
-        </div>
-      </section>
-
-      <section class="about-section reveal">
-        <div class="section-heading">
-          <span class="section-heading-num">01</span>
-          <h2 class="section-heading-en">Background</h2>
-        </div>
-        <div class="section-body">
-          <p>きっかけは、就職活動に向けて UI / UX デザインを学び始めたことでした。制作を重ねるうちに、実際に動き、誰かに届くプロダクトを自分の手で世に出したいという思いが強くなり、この道を選びました。</p>
-          <p>大学の数学科で培ったプログラミングと SQL の知識を土台に、AI を活用しながら、既存のアプリやサービスの UI / UX を見つめ直した新しいプロダクトを作り続けています。</p>
-        </div>
-      </section>
-
-      <section class="about-section reveal">
-        <div class="section-heading">
-          <span class="section-heading-num">02</span>
-          <h2 class="section-heading-en">Info</h2>
-        </div>
-        <dl class="info-list">
-          <div class="info-row">
-            <dt>Name</dt>
-            <dd>根岸 諄 / NEGISHI JUN</dd>
-          </div>
-          <div class="info-row">
-            <dt>Based in</dt>
-            <dd>Tokyo, Japan</dd>
-          </div>
-          <div class="info-row">
-            <dt>Established</dt>
-            <dd>2026</dd>
-          </div>
-          <div class="info-row">
-            <dt>Email</dt>
-            <dd><a href="mailto:contact@juuvo.app">contact@juuvo.app</a></dd>
-          </div>
-        </dl>
-      </section>
-    </main>
-
-    <footer>
-      © <span id="yr"></span> JUUVO
-    </footer>
-  </div>
+  <footer>
+    <div class="footer-grid">
+      <div class="footer-col footer-brand-col">
+        <span class="footer-brand-logo" aria-hidden="true"></span>
+        <p class="footer-tagline">日常を、静かに豊かに。</p>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-title">Site</div>
+        <ul>
+          <li><a href="./">Home</a></li>
+          <li><a href="about">About</a></li>
+          <li><a href="apps">Apps</a></li>
+          <li><a href="philosophy">Philosophy</a></li>
+          <li><a href="contact">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-title">Products</div>
+        <ul>
+          <li><a href="https://apps.apple.com/us/app/topik%E9%9F%93%E5%9B%BD%E8%AA%9E%E5%8D%98%E8%AA%9E%E5%B8%B38000/id6760393514" target="_blank" rel="noopener">TOPIK 単語帳 8000</a></li>
+          <li><a href="https://sidekit.tools/" target="_blank" rel="noopener">Sidekit</a></li>
+          <li><span>Coming soon</span></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-title">Contact</div>
+        <ul>
+          <li><a href="mailto:contact@juuvo.app">contact@juuvo.app</a></li>
+          <li><span>Tokyo, Japan</span></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© <span id="yr"></span> JUUVO</span>
+      <span>Built in Tokyo</span>
+    </div>
+  </footer>
 
   <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
   <script src="app.js"></script>

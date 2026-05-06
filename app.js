@@ -1,9 +1,7 @@
 // Year setter
 (() => {
-  const yr = new Date().getFullYear();
-  const yrEl = document.getElementById("yr");
-  if (yrEl) yrEl.textContent = yr;
-  document.querySelectorAll(".menu-year").forEach(el => el.textContent = yr);
+  const yearEl = document.getElementById('yr');
+  if (yearEl) yearEl.textContent = new Date().getFullYear();
 })();
 
 // Highlight active nav link
@@ -17,35 +15,7 @@
   });
 })();
 
-// Hamburger menu toggle (sidebar)
-(() => {
-  const btn = document.querySelector('.menu-btn');
-  const overlay = document.querySelector('.menu-overlay');
-  const backdrop = document.querySelector('.menu-backdrop');
-  if (!btn || !overlay || !backdrop) return;
-
-  const setOpen = (open) => {
-    document.body.classList.toggle('menu-open', open);
-    btn.setAttribute('aria-expanded', open);
-    overlay.setAttribute('aria-hidden', !open);
-  };
-
-  btn.addEventListener('click', () => {
-    setOpen(!document.body.classList.contains('menu-open'));
-  });
-
-  backdrop.addEventListener('click', () => setOpen(false));
-
-  overlay.querySelectorAll('a').forEach(a => {
-    a.addEventListener('click', () => setOpen(false));
-  });
-
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') setOpen(false);
-  });
-})();
-
-// Lenis smooth scroll (exposed as window.__lenis for page-specific hooks)
+// Lenis smooth scroll
 (() => {
   if (typeof Lenis === 'undefined') return;
   const lenis = new Lenis({
@@ -63,83 +33,6 @@
   window.__lenis = lenis;
 })();
 
-// Animated plus-grid background in hero
-(() => {
-  const heroBg = document.querySelector('.hero-bg');
-  if (!heroBg) return;
-
-  const canvas = document.createElement('canvas');
-  heroBg.appendChild(canvas);
-  const ctx = canvas.getContext('2d');
-
-  const SPACING = 22;
-  const DOT_RADIUS = 1;
-  const ALPHA_MIN = 0.04;
-  const ALPHA_MAX = 0.36;
-
-  let width = 0, height = 0, dpr = 1, points = [];
-
-  const resize = () => {
-    dpr = window.devicePixelRatio || 1;
-    const rect = heroBg.getBoundingClientRect();
-    width = rect.width;
-    height = rect.height;
-    canvas.width = width * dpr;
-    canvas.height = height * dpr;
-    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-
-    points = [];
-    const cols = Math.ceil(width / SPACING) + 1;
-    const rows = Math.ceil(height / SPACING) + 1;
-    const offsetX = (width - (cols - 1) * SPACING) / 2;
-    const offsetY = (height - (rows - 1) * SPACING) / 2;
-    for (let i = 0; i < cols; i++) {
-      for (let j = 0; j < rows; j++) {
-        points.push({ x: offsetX + i * SPACING, y: offsetY + j * SPACING });
-      }
-    }
-  };
-
-  const drawFrame = (t) => {
-    ctx.clearRect(0, 0, width, height);
-    const time = t * 0.0007;
-    const mid = (ALPHA_MIN + ALPHA_MAX) / 2;
-    const range = (ALPHA_MAX - ALPHA_MIN) / 2;
-    for (const p of points) {
-      const wave =
-        Math.sin(p.x * 0.012 + p.y * 0.006 + time) * 0.5 +
-        Math.sin(p.x * 0.005 - p.y * 0.011 + time * 0.7) * 0.5;
-      const alpha = mid + wave * range;
-      ctx.fillStyle = `rgba(255, 255, 255, ${alpha})`;
-      ctx.beginPath();
-      ctx.arc(p.x, p.y, DOT_RADIUS, 0, Math.PI * 2);
-      ctx.fill();
-    }
-  };
-
-  const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-  resize();
-  window.addEventListener('resize', resize);
-
-  if (reduced) {
-    drawFrame(0);
-  } else {
-    const loop = (t) => { drawFrame(t); requestAnimationFrame(loop); };
-    requestAnimationFrame(loop);
-  }
-})();
-
-// Switch topbar color when scrolling into light area
-(() => {
-  const lightArea = document.querySelector('.light-area');
-  if (!lightArea) return;
-  const io = new IntersectionObserver((entries) => {
-    document.body.classList.toggle('on-light', entries[0].isIntersecting);
-  }, { rootMargin: '-60px 0px -100% 0px' });
-  io.observe(lightArea);
-})();
-
 // Reveal on scroll into view
 (() => {
   const els = document.querySelectorAll('.reveal');
@@ -151,6 +44,72 @@
         io.unobserve(e.target);
       }
     });
-  }, { threshold: 0.2 });
+  }, { threshold: 0.15, rootMargin: '0px 0px -10% 0px' });
   els.forEach(el => io.observe(el));
+})();
+
+// Auto-rotate the active principle card on home (Dub-style focus cycle)
+(() => {
+  const grid = document.querySelector('.philosophy-grid');
+  if (!grid) return;
+  const cards = grid.querySelectorAll('.principle-card');
+  if (cards.length < 2) return;
+
+  const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const cycleMs = 5000;
+
+  let activeIndex = 0;
+  let intervalId = null;
+  let isHovered = false;
+
+  const tick = () => { if (!isHovered) advance(); };
+
+  const setActive = (index) => {
+    activeIndex = index;
+    // Remove from all, then force a reflow on the target before re-adding —
+    // ensures the @keyframes restarts even when the same card is reactivated.
+    cards.forEach((card) => card.classList.remove('is-active'));
+    void cards[index].offsetWidth;
+    cards[index].classList.add('is-active');
+    // Realign interval so the next advance is always cycleMs from this moment.
+    if (intervalId) {
+      clearInterval(intervalId);
+      intervalId = setInterval(tick, cycleMs);
+    }
+  };
+
+  const advance = () => setActive((activeIndex + 1) % cards.length);
+
+  const start = () => {
+    if (intervalId || reduced) return;
+    intervalId = setInterval(tick, cycleMs);
+    setActive(activeIndex);
+  };
+
+  const stop = () => {
+    if (!intervalId) return;
+    clearInterval(intervalId);
+    intervalId = null;
+  };
+
+  if (reduced) {
+    cards.forEach(c => c.classList.add('is-active'));
+    return;
+  }
+
+  setActive(0);
+
+  cards.forEach((card, i) => {
+    card.addEventListener('mouseenter', () => {
+      isHovered = true;
+      setActive(i);
+    });
+  });
+  grid.addEventListener('mouseleave', () => { isHovered = false; });
+
+  const io = new IntersectionObserver((entries) => {
+    if (entries[0].isIntersecting) start();
+    else stop();
+  }, { threshold: 0.3 });
+  io.observe(grid);
 })();
