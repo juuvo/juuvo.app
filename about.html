@@ -125,18 +125,6 @@
       color: var(--color-text);
     }
 
-    .section-body {
-      font-family: var(--font-jp);
-      font-weight: 300;
-      font-size: clamp(14px, 1.4vw, 16px);
-      line-height: 2.1;
-      letter-spacing: 0.04em;
-      color: var(--color-text);
-      max-width: 640px;
-    }
-
-    .section-body p + p { margin-top: 1.5em; }
-
     /* Info table */
     .info-list {
       display: flex;
@@ -180,34 +168,6 @@
 
     .info-row dd a:hover {
       border-bottom-color: var(--color-text);
-    }
-
-    /* Toolkit chips */
-    .toolkit-list {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-top: 28px;
-      list-style: none;
-      padding: 0;
-    }
-
-    .toolkit-list li {
-      font-family: var(--font-display);
-      font-size: 12px;
-      font-weight: 500;
-      letter-spacing: 0.04em;
-      padding: 6px 14px;
-      border: 1px solid var(--color-border-strong);
-      border-radius: var(--radius-pill);
-      color: var(--color-text-soft);
-      background: var(--color-bg);
-      transition: border-color 0.15s ease, color 0.15s ease;
-    }
-
-    .toolkit-list li:hover {
-      border-color: var(--color-text);
-      color: var(--color-text);
     }
 
     @media (max-width: 720px) {
@@ -265,17 +225,6 @@
     <section class="about-section reveal">
       <div class="section-heading">
         <span class="section-heading-num">01</span>
-        <h2 class="section-heading-en">Background</h2>
-      </div>
-      <div class="section-body">
-        <p>きっかけは、就職活動に向けて UI / UX デザインを学び始めたことでした。制作を重ねるうちに、実際に動き、誰かに届くプロダクトを自分の手で世に出したいという思いが強くなり、この道を選びました。</p>
-        <p>大学の数学科で培ったプログラミングと SQL の知識を土台に、AI を活用しながら、既存のアプリやサービスの UI / UX を見つめ直した新しいプロダクトを作り続けています。</p>
-      </div>
-    </section>
-
-    <section class="about-section reveal">
-      <div class="section-heading">
-        <span class="section-heading-num">02</span>
         <h2 class="section-heading-en">Info</h2>
       </div>
       <dl class="info-list">
@@ -296,26 +245,6 @@
           <dd><a href="mailto:contact@juuvo.app">contact@juuvo.app</a></dd>
         </div>
       </dl>
-    </section>
-
-    <section class="about-section reveal">
-      <div class="section-heading">
-        <span class="section-heading-num">03</span>
-        <h2 class="section-heading-en">Toolkit</h2>
-      </div>
-      <div class="section-body">
-        <p>モバイルアプリは React Native + Expo + Firebase、Web は Vanilla HTML/CSS/JS と Next.js で開発しています。デザインには Figma を、開発には AI を取り入れています。</p>
-      </div>
-      <ul class="toolkit-list">
-        <li>React Native</li>
-        <li>Expo</li>
-        <li>Firebase</li>
-        <li>Next.js</li>
-        <li>Vercel</li>
-        <li>TypeScript</li>
-        <li>Vanilla JS</li>
-        <li>Figma</li>
-      </ul>
     </section>
   </main>
   </div>
