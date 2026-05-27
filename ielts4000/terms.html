@@ -8,14 +8,23 @@
   body { font-family: sans-serif; max-width: 800px; margin: 40px auto; padding: 0 20px; line-height: 1.8; color: #333; }
   h1 { font-size: 24px; } h2 { font-size: 18px; margin-top: 32px; }
   table { border-collapse: collapse; width: 100%; margin: 16px 0; font-size: 14px; }
-  th, td { border: 1px solid #ccc; padding: 8px 12px; text-align: left; }
+  th, td { border: 1px solid #ccc; padding: 8px 12px; text-align: left; vertical-align: top; }
   th { background: #f5f5f5; }
+  .attribution { background: #fff7e6; padding: 16px; border: 1px solid #ffd591; border-radius: 4px; margin: 12px 0; }
+  .attribution ul { margin: 8px 0 0 20px; padding: 0; }
+  .attribution li { margin: 4px 0; }
+  .trademark { background: #f0f7ff; padding: 12px 16px; border: 1px solid #adc6ff; border-radius: 4px; margin: 12px 0; font-size: 14px; }
 </style>
 </head>
 <body>
 <h1>利用規約</h1>
-<p>最終更新日：2026年5月24日</p>
+<p>最終更新日：2026年5月28日</p>
 <p>本利用規約は、JUUVOが提供する「IELTS英単語帳4000」の利用条件を定めるものです。本アプリをご利用いただくことで、本規約に同意したものとみなします。</p>
+
+<div class="trademark">
+  IELTS<sup>®</sup> および IELTS Academic<sup>®</sup> は、IELTS Limited（British Council、IDP: IELTS Australia、Cambridge English Language Assessment の合弁）の登録商標です。
+  本アプリは IELTS Limited と無関係の独立した学習教材であり、IELTS Limited による承認・推薦を受けたものではありません。
+</div>
 
 <h2>サブスクリプション</h2>
 <ul>
@@ -39,15 +48,27 @@
 <table>
   <tr><th>データソース</th><th>出典</th><th>ライセンス</th></tr>
   <tr><td>NGSL (New General Service List) 1.2</td><td>Browne, C., Culligan, B., &amp; Phillips, J. (2013) <a href="https://www.newgeneralservicelist.com/">newgeneralservicelist.com</a></td><td>CC BY-SA 4.0</td></tr>
-  <tr><td>AWL (Academic Word List)</td><td>Coxhead, A. (2000). TESOL Quarterly, 34(2).</td><td>学術引用</td></tr>
+  <tr><td>AWL (Academic Word List)</td><td>Coxhead, A. (2000). <em>TESOL Quarterly</em>, 34(2).</td><td>学術引用</td></tr>
   <tr><td>NAWL (New Academic Word List) 1.2</td><td>Browne, C., Culligan, B. <a href="https://www.newgeneralservicelist.com/nawl-new-academic-word-list">newgeneralservicelist.com/nawl-new-academic-word-list</a></td><td>CC BY-SA 4.0</td></tr>
   <tr><td>COCA Academic</td><td>Davies, M. (Brigham Young University)</td><td>学術利用</td></tr>
 </table>
 <p>NGSL および NAWL は Creative Commons Attribution-ShareAlike 4.0 International (CC BY-SA 4.0) ライセンスで配布されています。本アプリは、これらの収録範囲を頻度フィルタおよび除外ベースラインとして参照し、最終的な収録 4,000 語は COCA Academic を主軸とした独自編集の結果として構築しています。</p>
 
+<h2>帰属表記（CC BY-SA 4.0）</h2>
+<div class="attribution">
+  本アプリは以下の CC BY-SA 4.0 ライセンスで公開されているデータソースを参照しています:
+  <ul>
+    <li><strong>NGSL (New General Service List) 1.2</strong> — Browne, C., Culligan, B., &amp; Phillips, J. (2013) <a href="https://www.newgeneralservicelist.com/">newgeneralservicelist.com</a> / <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a></li>
+    <li><strong>NAWL (New Academic Word List) 1.2</strong> — Browne, C., Culligan, B. <a href="https://www.newgeneralservicelist.com/nawl-new-academic-word-list">newgeneralservicelist.com/nawl-new-academic-word-list</a> / <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a></li>
+  </ul>
+</div>
+
 <h2>オープンソースライセンス</h2>
-<p><strong>openpyxl — MIT License</strong><br>Excel データ処理に使用しています。</p>
-<p><strong>pypdf — BSD 3-Clause License</strong><br>IELTS 公式サンプル PDF の解析に使用しています。</p>
+<p><strong>openpyxl — MIT License</strong><br>Excel データ処理 (build-time) に使用しています。</p>
+<p><strong>pypdf — BSD 3-Clause License</strong><br>IELTS 公式サンプル PDF の解析 (build-time) に使用しています。</p>
+
+<h2>音声データについて</h2>
+<p>本アプリに同梱されている音声データ（mp3）は <a href="https://cloud.google.com/text-to-speech">Google Cloud Text-to-Speech</a>（Wavenet / Chirp3-HD）を使用して事前生成したものです。音声データの配布はサービス利用契約に基づきます。</p>
 
 <h2>規約の変更</h2>
 <p>本規約は予告なく変更される場合があります。変更後も本アプリを使用し続けることで、変更後の規約に同意したものとみなします。</p>
