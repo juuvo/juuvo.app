@@ -8,18 +8,23 @@
   2. {{APP_NAME}} と {{DATE}} を置換 (Cmd+F で一括)
      - APP_NAME: 正式アプリ名 (例: 仏検9000)
      - DATE: 最終更新日 (例: 2026年5月28日)
-  3. データソース表の行を入れ替え (TODO コメントの場所)
-  4. 必要に応じて以下のセクションを削除 or 編集:
-     - サブスク価格を明記する場合: 価格バリアントに差し替え
+  3. **商標表記** ({{TRADEMARK_TEXT}}) を当該試験の権利者表記に置換
+     - 試験名 (TOEFL / IELTS / HSK / TOPIK / 仏検 / 独検 等) は第三者の登録商標
+     - "本アプリは無関係の独立教材" という免責が必須 (HSK は中国教育部 等)
+  4. データソース表の行を入れ替え (TODO コメントの場所)
+  5. 必要に応じて以下のセクションを削除 or 編集:
+     - サブスク価格を明記する場合: 価格バリアントに差し替え (推奨は非明記、価格変更耐性)
      - CC-BY 系ソースがない場合: 「帰属表記」セクション削除
      - 配布物に OSS を含めない場合: 「オープンソースライセンス」削除
      - TTS 音声を同梱しない場合: 「音声データについて」削除
 
-  参考実装:
-  - topik8000/   シンプル構成、attribution box なし
-  - hsk11092/    Tatoeba CC-BY attribution あり、jieba 等の OSS あり
-  - ielts4000/   CC-BY-SA 帰属、OSS は build-time のみ
-  - futsuken9000/ CC-BY 複数、TTS 音声同梱
+  参考実装 (2026-05-28 全アプリ統一済み):
+  - topik8000/   krdict (CC BY-SA 2.0 KR) + Leipzig (CC BY 4.0)
+  - hsk11092/    Tatoeba CC-BY 2.0 FR、jieba/wordfreq の MIT ライセンス全文掲載
+  - ielts4000/   NGSL/NAWL (CC BY-SA 4.0)、OSS は build-time のみ
+  - futsuken9000/ 4 つの CC-BY 系 (Lexique4/JMdict/Tatoeba/DBnary)、TTS 同梱
+  - toefl5000/   IELTS + AVL 構成、ETS 商標表記の参考例
+  - dokken3000/  Wikidata Lexemes (CC0) + Leipzig/JMdict/DBnary
 -->
 <html lang="ja">
 <head>
@@ -38,12 +43,26 @@
   .license-text { background: #f9f9f9; padding: 16px; font-size: 12px; line-height: 1.6; white-space: pre-wrap; border: 1px solid #ddd; border-radius: 4px; margin: 12px 0; }
   ul.oss-list { padding-left: 20px; }
   ul.oss-list li { margin: 6px 0; }
+  .trademark { background: #f0f7ff; padding: 12px 16px; border: 1px solid #adc6ff; border-radius: 4px; margin: 12px 0; font-size: 14px; }
 </style>
 </head>
 <body>
 <h1>利用規約</h1>
 <p>最終更新日：{{DATE}}</p>
 <p>本利用規約は、JUUVOが提供する「{{APP_NAME}}」の利用条件を定めるものです。本アプリをご利用いただくことで、本規約に同意したものとみなします。</p>
+
+<!-- ===== 商標表記 (必須) =====
+     試験名は第三者の登録商標。各アプリ参考実装:
+     - TOEFL:  TOEFL® / TOEFL iBT® は Educational Testing Service (ETS) の登録商標
+     - IELTS:  IELTS® / IELTS Academic® は IELTS Limited (British Council、IDP、Cambridge) の登録商標
+     - HSK:    HSK® / 汉语水平考试 は中国教育部中外語言交流合作中心 (旧 国家漢辦) の登録商標
+     - TOPIK:  TOPIK® / 한국어능력시험 は大韓民国教育部 + 国立国際教育院 (NIIED) の登録商標
+     - 仏検:   実用フランス語技能検定試験 (仏検) は公益財団法人 フランス語教育振興協会 (APEF) の登録商標
+     - 独検:   ドイツ語技能検定試験 (独検) は公益財団法人 ドイツ語学文学振興会 の登録商標 -->
+<div class="trademark">
+  {{TRADEMARK_TEXT}}
+  本アプリは {{TRADEMARK_HOLDER_SHORT}} と無関係の独立した学習教材であり、{{TRADEMARK_HOLDER_SHORT}} による承認・推薦を受けたものではありません。
+</div>
 
 <h2>サブスクリプション</h2>
 <!-- 価格を明記しない通常版 -->
@@ -111,7 +130,7 @@ in the Software without restriction, ...
 
 <!-- ===== TTS 音声を同梱しない場合は <h2>音声データについて</h2> ごと削除 ===== -->
 <h2>音声データについて</h2>
-<p>本アプリに同梱されている音声データ（mp3）は <a href="https://cloud.google.com/text-to-speech">Google Cloud Text-to-Speech</a>（Wavenet）を使用して事前生成したものです。音声データの配布はサービス利用契約に基づきます。</p>
+<p>本アプリに同梱されている音声データ（mp3）は <a href="https://cloud.google.com/text-to-speech">Google Cloud Text-to-Speech</a>（Wavenet / Chirp3-HD）を使用して事前生成したものです。音声データの配布はサービス利用契約に基づきます。</p>
 
 <h2>規約の変更</h2>
 <p>本規約は予告なく変更される場合があります。変更後も本アプリを使用し続けることで、変更後の規約に同意したものとみなします。</p>
