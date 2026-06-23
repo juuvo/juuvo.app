@@ -291,22 +291,42 @@ img {
   z-index: 1;
 }
 
-/* === Home hero === */
+/* === Home hero (2-column: content left / mockups right) === */
 .hero {
-  padding: 184px 32px 120px;
-  text-align: center;
+  padding: 168px 32px 120px;
+  text-align: left;
+}
+
+/* Animated ribbon canvas — replaces the static ::before dot grid on hero and page-hero */
+.hero::before,
+.page-hero::before { display: none; }
+
+.hero-bg-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+  mask: linear-gradient(to bottom, black 0%, black 65%, transparent 100%);
+  -webkit-mask: linear-gradient(to bottom, black 0%, black 65%, transparent 100%);
 }
 
 .hero-inner {
   width: 100%;
-  max-width: 960px;
+  max-width: 1280px;
   margin: 0 auto;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr);
+  gap: 56px;
+  align-items: center;
 }
+
+.hero-content { min-width: 0; }
 
 .hero-eyebrow {
   display: inline-flex;
   align-items: center;
-  justify-content: center;
   gap: 12px;
   font-family: var(--font-display);
   font-weight: 500;
@@ -332,22 +352,25 @@ img {
 .hero-title {
   font-family: var(--font-jp);
   font-weight: 600;
-  font-size: clamp(40px, 8.4vw, 104px);
-  line-height: 1.18;
+  font-size: clamp(38px, 5.6vw, 76px);
+  line-height: 1.15;
   letter-spacing: -0.03em;
   color: var(--color-text);
-  max-width: 14ch;
-  margin: 0 auto;
-  padding-left: 0.45em;
+  margin: 0;
   font-feature-settings: "palt" 1;
+  /* Soft white halo so the text stays readable over the drifting ribbons */
+  text-shadow:
+    0 0 24px rgba(255, 255, 255, 0.9),
+    0 0 48px rgba(255, 255, 255, 0.7),
+    0 0 80px rgba(255, 255, 255, 0.4);
 }
 
 .hero-sub {
-  margin: 32px auto 0;
-  max-width: 50ch;
+  margin: 28px 0 0;
+  max-width: 44ch;
   font-family: var(--font-display);
   font-weight: 400;
-  font-size: clamp(15px, 1.5vw, 18px);
+  font-size: clamp(15px, 1.4vw, 17px);
   line-height: 1.65;
   letter-spacing: 0.005em;
   color: var(--color-text-muted);
@@ -356,20 +379,96 @@ img {
 .hero-actions {
   position: relative;
   z-index: 2;
-  margin-top: 44px;
+  margin-top: 40px;
   display: flex;
   gap: 12px;
   flex-wrap: wrap;
-  justify-content: center;
 }
 
 .hero-actions .btn {
   box-shadow: var(--shadow-float);
 }
 
+/* === Hero mockups (slideshow: iPad + iPhone side by side) === */
+.hero-mockups {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 28px;
+  width: 100%;
+  min-width: 0;
+}
+
+.mockup-slot {
+  position: relative;
+  flex-shrink: 0;
+}
+
+.mockup-slot-ipad {
+  width: 340px;
+  height: 460px;
+}
+
+.mockup-slot-iphone {
+  width: 200px;
+  height: 410px;
+}
+
+.mockup-slide {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  opacity: 0;
+  /* no transition on the way OUT — hard cut so the old slide vanishes instantly
+     once the new one has finished fading in. keeps the bezel from ghosting. */
+  transition: opacity 0s;
+  pointer-events: none;
+  backface-visibility: hidden;
+  image-rendering: auto;
+  /* Soft white halo so the device pops over the drifting ribbons */
+  filter:
+    drop-shadow(0 0 24px rgba(255, 255, 255, 0.7))
+    drop-shadow(0 0 48px rgba(255, 255, 255, 0.4));
+}
+
+.mockup-slide.is-active {
+  opacity: 1;
+  /* smooth fade-IN on top of the previously-active slide; both remain at opacity 1
+     simultaneously, so the bezel pixels (identical across all slides) never dim. */
+  transition: opacity 0.7s ease-in-out;
+}
+
+@media (max-width: 1024px) {
+  .hero-inner { gap: 40px; }
+  .hero-mockups { gap: 20px; }
+  .mockup-slot-ipad { width: 280px; height: 380px; }
+  .mockup-slot-iphone { width: 170px; height: 350px; }
+}
+
+@media (max-width: 880px) {
+  .hero-inner {
+    grid-template-columns: 1fr;
+    gap: 56px;
+  }
+  .hero-mockups { max-width: 640px; margin: 0 auto; }
+  .mockup-slot-ipad { width: 320px; height: 430px; }
+  .mockup-slot-iphone { width: 190px; height: 390px; }
+}
+
 @media (max-width: 720px) {
-  .hero { padding: 140px 24px 88px; }
+  .hero { padding: 140px 24px 80px; }
   .hero-eyebrow { margin-bottom: 28px; }
+  .hero-mockups { gap: 16px; }
+  .mockup-slot-ipad { width: 220px; height: 300px; }
+  .mockup-slot-iphone { width: 130px; height: 270px; }
+}
+
+@media (max-width: 480px) {
+  .mockup-slot-ipad { width: 180px; height: 245px; }
+  .mockup-slot-iphone { width: 110px; height: 226px; }
 }
 
 .page-label {
@@ -397,6 +496,11 @@ img {
   letter-spacing: -0.02em;
   line-height: 1.2;
   color: var(--color-text);
+  /* Soft white halo so the title stays readable over the drifting ribbon */
+  text-shadow:
+    0 0 24px rgba(255, 255, 255, 0.9),
+    0 0 48px rgba(255, 255, 255, 0.7),
+    0 0 80px rgba(255, 255, 255, 0.4);
 }
 
 @media (max-width: 720px) {
@@ -622,11 +726,6 @@ img {
   background: var(--color-surface-hover);
 }
 
-.product-card.is-coming-soon {
-  pointer-events: none;
-  background: transparent;
-}
-
 .product-icon {
   width: 56px;
   height: 56px;
@@ -645,15 +744,6 @@ img {
   height: 100%;
   object-fit: cover;
 }
-
-.product-icon.is-empty {
-  background: transparent;
-  color: var(--color-text-faint);
-  font-family: var(--font-display);
-  font-size: 22px;
-}
-
-.product-icon.is-empty::before { content: '—'; }
 
 .product-name {
   font-family: var(--font-jp);
@@ -869,12 +959,6 @@ img {
   background: transparent;
   color: var(--color-text);
   border: 1px solid var(--color-border-strong);
-}
-
-.badge-soon {
-  background: transparent;
-  color: var(--color-text-muted);
-  border: 1px solid var(--color-border);
 }
 
 /* === Reveal on scroll === */

@@ -27,13 +27,20 @@
   </header>
 
   <section class="hero">
+    <canvas class="hero-bg-canvas" aria-hidden="true"></canvas>
     <div class="hero-inner">
-      <div class="hero-eyebrow reveal">Product Studio</div>
-      <h1 class="hero-title reveal">日常を、<br>静かに豊かに。</h1>
-      <p class="hero-sub reveal reveal-2">A studio of small, considered products — designed and built in Tokyo, one at a time.</p>
-      <div class="hero-actions reveal reveal-3">
-        <a class="btn btn-primary btn-lg" href="apps">View products <span class="arrow">→</span></a>
-        <a class="btn btn-secondary btn-lg" href="philosophy">Read philosophy</a>
+      <div class="hero-content">
+        <h1 class="hero-title reveal">日常を、<br>静かに豊かに。</h1>
+      </div>
+      <div class="hero-mockups reveal reveal-2" aria-hidden="true">
+        <div class="mockup-slot mockup-slot-ipad"
+             data-folder="Device Bezels/iPad/"
+             data-pattern="iPad Air - Space Gray - Portrait"
+             data-count="12"></div>
+        <div class="mockup-slot mockup-slot-iphone"
+             data-folder="Device Bezels/iPhone/"
+             data-pattern="iMockup - iPhone 15 Pro Max"
+             data-count="12"></div>
       </div>
     </div>
   </section>
@@ -75,20 +82,37 @@
     <div class="home-section-inner">
       <div class="section-head reveal">
         <div class="section-head-eyebrow">Products</div>
-        <h2 class="section-head-title">今あるもの、これから作るもの。</h2>
-        <p class="section-head-desc">東京の小さな机から、ひとつずつ世に出しています。</p>
+        <h2 class="section-head-title">プロダクト</h2>
       </div>
       <div class="products-grid">
         <a class="product-card reveal" href="https://apps.apple.com/us/app/topik%E9%9F%93%E5%9B%BD%E8%AA%9E%E5%8D%98%E8%AA%9E%E5%B8%B38000/id6760393514" target="_blank" rel="noopener">
-          <div class="product-icon"><img src="icon-topik.png" alt=""></div>
-          <h3 class="product-name">TOPIK 単語帳 8000</h3>
-          <p class="product-desc">韓国語能力試験向けの単語帳iOSアプリ。8,000語をネイティブ音声と習熟度管理で。</p>
+          <div class="product-icon"><img src="Device%20Bezels/topik8000-icon.png" alt=""></div>
+          <h3 class="product-name">TOPIK韓国語単語帳8000</h3>
+          <p class="product-desc">韓国語能力試験向けの単語帳iOSアプリ。8,000語を音声と習熟度管理で。</p>
           <div class="product-foot">
             <span class="badge badge-live">iOS</span>
             <span class="product-link">App Store <span class="arrow">→</span></span>
           </div>
         </a>
-        <a class="product-card reveal reveal-2" href="https://sidekit.tools/" target="_blank" rel="noopener">
+        <a class="product-card reveal reveal-2" href="https://apps.apple.com/jp/app/id6770573656" target="_blank" rel="noopener">
+          <div class="product-icon"><img src="Device%20Bezels/hsk11092-icon.png" alt=""></div>
+          <h3 class="product-name">HSK中国語単語帳11092</h3>
+          <p class="product-desc">中国語検定HSK向けの単語帳iOSアプリ。11,092語を音声と習熟度管理で。</p>
+          <div class="product-foot">
+            <span class="badge badge-live">iOS</span>
+            <span class="product-link">App Store <span class="arrow">→</span></span>
+          </div>
+        </a>
+        <a class="product-card reveal reveal-3" href="https://apps.apple.com/jp/app/id6772685181" target="_blank" rel="noopener">
+          <div class="product-icon"><img src="Device%20Bezels/futsuken9000-icon.png" alt=""></div>
+          <h3 class="product-name">仏検フランス語単語帳9000</h3>
+          <p class="product-desc">実用フランス語技能検定向けの単語帳iOSアプリ。9,000語を音声と習熟度管理で。</p>
+          <div class="product-foot">
+            <span class="badge badge-live">iOS</span>
+            <span class="product-link">App Store <span class="arrow">→</span></span>
+          </div>
+        </a>
+        <a class="product-card reveal" href="https://sidekit.tools/" target="_blank" rel="noopener">
           <div class="product-icon"><img src="icon-sidekit.svg" alt=""></div>
           <h3 class="product-name">Sidekit</h3>
           <p class="product-desc">ブラウザ完結型のクリエイティブツール集。動画・画像・GIF・APNGの変換／編集／圧縮。</p>
@@ -97,14 +121,6 @@
             <span class="product-link">Visit <span class="arrow">→</span></span>
           </div>
         </a>
-        <div class="product-card is-coming-soon reveal reveal-3">
-          <div class="product-icon is-empty"></div>
-          <h3 class="product-name">Coming soon</h3>
-          <p class="product-desc">次のプロダクトを準備中。</p>
-          <div class="product-foot">
-            <span class="badge badge-soon">In development</span>
-          </div>
-        </div>
       </div>
       <div class="section-end reveal">
         <a class="btn btn-secondary" href="apps">All products <span class="arrow">→</span></a>
@@ -131,9 +147,10 @@
       <div class="footer-col">
         <div class="footer-col-title">Products</div>
         <ul>
-          <li><a href="https://apps.apple.com/us/app/topik%E9%9F%93%E5%9B%BD%E8%AA%9E%E5%8D%98%E8%AA%9E%E5%B8%B38000/id6760393514" target="_blank" rel="noopener">TOPIK 単語帳 8000</a></li>
+          <li><a href="https://apps.apple.com/us/app/topik%E9%9F%93%E5%9B%BD%E8%AA%9E%E5%8D%98%E8%AA%9E%E5%B8%B38000/id6760393514" target="_blank" rel="noopener">TOPIK韓国語単語帳8000</a></li>
+          <li><a href="https://apps.apple.com/jp/app/id6770573656" target="_blank" rel="noopener">HSK中国語単語帳11092</a></li>
+          <li><a href="https://apps.apple.com/jp/app/id6772685181" target="_blank" rel="noopener">仏検フランス語単語帳9000</a></li>
           <li><a href="https://sidekit.tools/" target="_blank" rel="noopener">Sidekit</a></li>
-          <li><span>Coming soon</span></li>
         </ul>
       </div>
       <div class="footer-col">
@@ -146,7 +163,6 @@
     </div>
     <div class="footer-bottom">
       <span>© <span id="yr"></span> JUUVO</span>
-      <span>Built in Tokyo</span>
     </div>
   </footer>
 

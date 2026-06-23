@@ -1,0 +1,6 @@
+# macOS
+.DS_Store
+
+# Internal working notes / ASO strategy (kept local only)
+Device Bezels/*.md
+_original-mockups-backup/
