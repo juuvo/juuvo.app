@@ -18,16 +18,6 @@
       padding: 96px 32px 120px;
     }
 
-    .about-section {
-      padding: 64px 0;
-      border-top: 1px solid var(--color-border);
-    }
-
-    .about-section:first-child {
-      padding-top: 0;
-      border-top: none;
-    }
-
     /* Profile (2-column) */
     .profile {
       display: grid;
@@ -102,74 +92,6 @@
       color: var(--color-text);
     }
 
-    /* Section heading */
-    .section-heading {
-      display: flex;
-      align-items: center;
-      gap: 20px;
-      margin-bottom: 40px;
-    }
-
-    .section-heading-num {
-      font-family: var(--font-pixel);
-      font-size: 11px;
-      color: var(--color-text-muted);
-      letter-spacing: 0.2em;
-    }
-
-    .section-heading-en {
-      font-family: var(--font-display);
-      font-weight: 600;
-      font-size: clamp(24px, 3vw, 36px);
-      letter-spacing: -0.02em;
-      color: var(--color-text);
-    }
-
-    /* Info table */
-    .info-list {
-      display: flex;
-      flex-direction: column;
-    }
-
-    .info-row {
-      display: grid;
-      grid-template-columns: 140px 1fr;
-      gap: 20px;
-      padding: 16px 0;
-      border-bottom: 1px solid var(--color-border);
-      align-items: center;
-    }
-
-    .info-row:last-child { border-bottom: none; }
-
-    .info-row dt {
-      font-family: var(--font-display);
-      font-weight: 400;
-      font-size: 11px;
-      letter-spacing: 0.25em;
-      text-transform: uppercase;
-      color: var(--color-text-muted);
-    }
-
-    .info-row dd {
-      font-family: var(--font-body);
-      font-size: 14px;
-      color: var(--color-text);
-      letter-spacing: 0.02em;
-    }
-
-    .info-row dd a {
-      color: inherit;
-      text-decoration: none;
-      border-bottom: 1px solid var(--color-border);
-      padding-bottom: 2px;
-      transition: border-color 0.2s;
-    }
-
-    .info-row dd a:hover {
-      border-bottom-color: var(--color-text);
-    }
-
     @media (max-width: 720px) {
       main.about-main { padding: 72px 24px 80px; }
       .profile {
@@ -177,8 +99,6 @@
         gap: 32px;
       }
       .profile-photo { max-width: 240px; }
-      .info-row { grid-template-columns: 100px 1fr; }
-      .about-section { padding: 48px 0; }
     }
   </style>
 </head>
@@ -205,7 +125,7 @@
 
   <div class="content-shell">
     <main class="about-main">
-    <section class="about-section reveal">
+    <section class="section-panel reveal">
       <div class="profile">
         <div class="profile-photo" aria-label="Portrait placeholder"></div>
         <div class="profile-details">
@@ -222,27 +142,27 @@
       </div>
     </section>
 
-    <section class="about-section reveal">
+    <section class="section-panel reveal">
       <div class="section-heading">
         <span class="section-heading-num">01</span>
         <h2 class="section-heading-en">Info</h2>
       </div>
-      <dl class="info-list">
-        <div class="info-row">
+      <dl class="data-list">
+        <div class="data-row">
           <dt>Name</dt>
           <dd>根岸 諄 / NEGISHI JUN</dd>
         </div>
-        <div class="info-row">
+        <div class="data-row">
           <dt>Based in</dt>
           <dd>Tokyo, Japan</dd>
         </div>
-        <div class="info-row">
+        <div class="data-row">
           <dt>Established</dt>
           <dd>2026</dd>
         </div>
-        <div class="info-row">
+        <div class="data-row">
           <dt>Email</dt>
-          <dd><a href="mailto:contact@juuvo.app">contact@juuvo.app</a></dd>
+          <dd><a class="text-link" href="mailto:contact@juuvo.app">contact@juuvo.app</a></dd>
         </div>
       </dl>
     </section>
