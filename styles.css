@@ -360,9 +360,9 @@ img {
 .hero-title {
   font-family: var(--font-jp);
   font-weight: 600;
-  font-size: clamp(38px, 5.6vw, 76px);
-  line-height: 1.15;
-  letter-spacing: -0.03em;
+  font-size: clamp(30px, 3.4vw, 48px);
+  line-height: 1.35;
+  letter-spacing: -0.02em;
   color: var(--color-text);
   margin: 0;
   font-feature-settings: "palt" 1;
@@ -372,6 +372,9 @@ img {
     0 0 48px rgba(255, 255, 255, 0.7),
     0 0 80px rgba(255, 255, 255, 0.4);
 }
+
+/* Keep a phrase together when the line wraps (Safari has no word-break: auto-phrase) */
+.nowrap { display: inline-block; }
 
 .hero-sub {
   margin: 28px 0 0;
@@ -1239,6 +1242,14 @@ footer {
   letter-spacing: 0.02em;
   color: var(--color-text-muted);
   max-width: 22em;
+}
+
+.footer-tagline-latin {
+  font-family: var(--font-jp-serif);
+  font-style: italic;
+  font-weight: 300;
+  font-size: 14px;
+  letter-spacing: 0.01em;
 }
 
 .footer-col-title {
