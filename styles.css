@@ -411,6 +411,8 @@ img {
 .mockup-slot {
   position: relative;
   flex-shrink: 0;
+  display: flex;
+  align-items: center;
 }
 
 .mockup-slot-ipad {
@@ -423,29 +425,89 @@ img {
   height: 410px;
 }
 
+/* Device frames drawn in CSS; the screen images are raw app screenshots (hero-screens/) */
+.device {
+  position: relative;
+  width: 100%;
+  background: #111;
+  box-shadow:
+    0 0 0 1.5px #5a5a5e,
+    0 0 0 3px #1c1c1e,
+    0 0 32px rgba(255, 255, 255, 0.75),
+    0 24px 48px -16px rgba(0, 0, 0, 0.35);
+}
+
+.device-screen {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: #fff;
+}
+
+/* iPhone 16 Pro: 71.5 x 149.6 mm, screen 1206 x 2622 */
+.device-iphone {
+  aspect-ratio: 71.5 / 149.6;
+  padding: 3.4%;
+  border-radius: 16% / 7.6%;
+}
+
+.device-iphone .device-screen {
+  border-radius: 13% / 6%;
+}
+
+.device-iphone .device-screen::after {
+  content: '';
+  position: absolute;
+  z-index: 2;
+  top: 1.35%;
+  left: 50%;
+  width: 31%;
+  aspect-ratio: 3.4 / 1;
+  transform: translateX(-50%);
+  border-radius: 999px;
+  background: #000;
+}
+
+/* iPad Air 11": 178.5 x 247.6 mm, screen 1640 x 2360 */
+.device-ipad {
+  aspect-ratio: 178.5 / 247.6;
+  padding: 5.8%;
+  border-radius: 7.5% / 5.4%;
+}
+
+.device-ipad .device-screen {
+  border-radius: 2.4% / 1.7%;
+}
+
+.device-ipad::before {
+  content: '';
+  position: absolute;
+  top: 2.6%;
+  left: 50%;
+  width: 1.4%;
+  aspect-ratio: 1;
+  transform: translateX(-50%);
+  border-radius: 50%;
+  background: #2a2a2e;
+}
+
 .mockup-slide {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
-  object-fit: contain;
+  object-fit: cover;
+  object-position: top center;
   opacity: 0;
-  /* no transition on the way OUT — hard cut so the old slide vanishes instantly
-     once the new one has finished fading in. keeps the bezel from ghosting. */
+  /* no transition on the way OUT — hard cut once the new slide has faded in on top */
   transition: opacity 0s;
   pointer-events: none;
   backface-visibility: hidden;
-  image-rendering: auto;
-  /* Soft white halo so the device pops over the drifting ribbons */
-  filter:
-    drop-shadow(0 0 24px rgba(255, 255, 255, 0.7))
-    drop-shadow(0 0 48px rgba(255, 255, 255, 0.4));
 }
 
 .mockup-slide.is-active {
   opacity: 1;
-  /* smooth fade-IN on top of the previously-active slide; both remain at opacity 1
-     simultaneously, so the bezel pixels (identical across all slides) never dim. */
   transition: opacity 0.7s ease-in-out;
 }
 
@@ -640,7 +702,7 @@ img {
 .series-card {
   position: relative;
   overflow: hidden;
-  padding: 56px 48px;
+  padding: 56px 0 48px;
   border: 1px solid var(--color-border);
   border-radius: var(--radius-lg);
   background: var(--color-surface);
@@ -659,11 +721,38 @@ img {
   pointer-events: none;
 }
 
-.series-grid {
+.marquee {
   position: relative;
-  display: grid;
-  grid-template-columns: repeat(6, minmax(0, 1fr));
-  gap: 40px 24px;
+  overflow: hidden;
+  -webkit-mask: linear-gradient(90deg, transparent 0, #000 10%, #000 90%, transparent 100%);
+  mask: linear-gradient(90deg, transparent 0, #000 10%, #000 90%, transparent 100%);
+}
+
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee-scroll 48s linear infinite;
+}
+
+.marquee:hover .marquee-track {
+  animation-play-state: paused;
+}
+
+.marquee-group {
+  display: flex;
+  gap: 40px;
+  padding-right: 40px;
+}
+
+@keyframes marquee-scroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee { -webkit-mask: none; mask: none; overflow-x: auto; }
+  .marquee-track { animation: none; }
+  .marquee-group[aria-hidden="true"] { display: none; }
 }
 
 .series-app {
@@ -676,8 +765,7 @@ img {
 }
 
 .series-app img {
-  width: 100%;
-  max-width: 112px;
+  width: 104px;
   height: auto;
   aspect-ratio: 1;
   border-radius: 22.5%;
@@ -718,11 +806,6 @@ img {
   font-feature-settings: "palt" 1;
 }
 
-@media (max-width: 880px) {
-  .series-grid {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-  }
-}
 
 @media (max-width: 720px) {
   .home-feature-section {
@@ -730,16 +813,16 @@ img {
   }
 
   .series-card {
-    padding: 36px 20px;
+    padding: 36px 0 32px;
   }
 
-  .series-grid {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 28px 12px;
+  .marquee-group {
+    gap: 28px;
+    padding-right: 28px;
   }
 
   .series-app img {
-    max-width: 88px;
+    width: 80px;
   }
 
   .home-philosophy-section {

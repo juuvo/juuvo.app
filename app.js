@@ -155,82 +155,94 @@
 })();
 
 
-// Hero mockup slideshows (iPad + iPhone) — lazy-loaded slides cycle independently
+// Hero mockups — word screens of every app, in a random order on each visit.
+// iPad and iPhone show the same app; an app without an iPad screen keeps the previous iPad slide.
 (() => {
-  const slots = document.querySelectorAll('.mockup-slot');
-  if (!slots.length) return;
+  const screens = document.querySelectorAll('.device-screen[data-device]');
+  if (!screens.length) return;
+
+  // hero-screens/<device>/<product>.webp
+  const SCREENS = {
+    iphone: ['topik8000', 'hanken6000', 'hsk11092', 'chuken8000', 'tocfl8000', 'ielts4000',
+             'toefl5000', 'futsuken9000', 'dele6000', 'jlpt10000'],
+    ipad:   ['topik8000', 'hanken6000', 'hsk11092', 'chuken8000', 'tocfl8000', 'ielts4000',
+             'toefl5000', 'futsuken9000', 'jlpt10000'],
+  };
+
+  const order = [...SCREENS.iphone];
+  for (let i = order.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [order[i], order[j]] = [order[j], order[i]];
+  }
 
   const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const fadeMs = 700; // must match the CSS .is-active transition duration
+  const cycleMs = 4000;
 
-  slots.forEach((slot, slotIdx) => {
-    const folder = slot.dataset.folder;
-    const pattern = slot.dataset.pattern;
-    const count = parseInt(slot.dataset.count, 10);
-    if (!folder || !pattern || !count) return;
-
-    const buildUrl = (i) => {
-      const suffix = i === 0 ? '' : `-${i}`;
-      return encodeURI(`${folder}${pattern}${suffix}.png`);
-    };
-
-    // Create img elements; only first 1-2 get real src immediately
-    const slides = [];
-    for (let i = 0; i < count; i++) {
+  const devices = [...screens].map((screen) => {
+    const device = screen.dataset.device;
+    const available = new Set(SCREENS[device] || []);
+    const slides = new Map();
+    order.forEach((product) => {
+      if (!available.has(product)) return;
       const img = document.createElement('img');
       img.className = 'mockup-slide';
       img.alt = '';
       img.decoding = 'async';
-      if (i === 0) {
-        img.src = buildUrl(i);
-        img.classList.add('is-active');
-      } else {
-        img.dataset.src = buildUrl(i);
-      }
-      slot.appendChild(img);
-      slides.push(img);
-    }
-
-    if (reduced || slides.length < 2) return;
-
-    // Preload second slide right away so the first transition is smooth
-    if (slides[1].dataset.src) {
-      slides[1].src = slides[1].dataset.src;
-      delete slides[1].dataset.src;
-    }
-
-    let current = 0;
-    const cycleMs = 3400 + slotIdx * 800; // desync so the two devices don't blink together
-    const fadeMs = 700; // must match the CSS .is-active transition duration
-
-    let intervalId = null;
-
-    const tick = () => {
-      const next = (current + 1) % slides.length;
-      // Promote data-src → src for the slide AFTER next (preload one ahead)
-      const ahead = (next + 1) % slides.length;
-      if (slides[ahead].dataset.src) {
-        slides[ahead].src = slides[ahead].dataset.src;
-        delete slides[ahead].dataset.src;
-      }
-      // New slide fades IN on top of current. Current stays at opacity 1 underneath,
-      // so the bezel never dims. After the fade completes, hard-cut current to 0.
-      const justWasCurrent = current;
-      slides[next].classList.add('is-active');
-      current = next;
-      setTimeout(() => {
-        slides[justWasCurrent].classList.remove('is-active');
-      }, fadeMs);
-    };
-
-    const start = () => { if (!intervalId) intervalId = setInterval(tick, cycleMs); };
-    const stop  = () => { if (intervalId) { clearInterval(intervalId); intervalId = null; } };
-
-    // Pause when slot leaves viewport
-    const io = new IntersectionObserver((entries) => {
-      if (entries[0].isIntersecting) start(); else stop();
-    }, { threshold: 0.1 });
-    io.observe(slot);
+      img.dataset.src = `hero-screens/${device}/${product}.webp`;
+      screen.appendChild(img);
+      slides.set(product, img);
+    });
+    return { slides, current: null };
   });
+
+  const load = (img) => {
+    if (img && img.dataset.src) {
+      img.src = img.dataset.src;
+      delete img.dataset.src;
+    }
+  };
+
+  const show = (dev, product) => {
+    const next = dev.slides.get(product);
+    if (!next || next === dev.current) return;
+    load(next);
+    const prev = dev.current;
+    next.classList.add('is-active');
+    dev.current = next;
+    if (prev) setTimeout(() => prev.classList.remove('is-active'), fadeMs);
+  };
+
+  // Preload the slide after `index` for every device so the next fade is smooth
+  const preload = (index) => {
+    const product = order[(index + 1) % order.length];
+    devices.forEach((dev) => load(dev.slides.get(product)));
+  };
+
+  let index = 0;
+  devices.forEach((dev) => show(dev, order[0]));
+  // The first app might have no iPad screen: fall back to the first one that does
+  devices.forEach((dev) => {
+    if (!dev.current) show(dev, order.find((product) => dev.slides.has(product)));
+  });
+  if (reduced) return;
+  preload(index);
+
+  const tick = () => {
+    index = (index + 1) % order.length;
+    const product = order[index];
+    devices.forEach((dev, i) => setTimeout(() => show(dev, product), i * 250));
+    preload(index);
+  };
+
+  let intervalId = null;
+  const start = () => { if (!intervalId) intervalId = setInterval(tick, cycleMs); };
+  const stop = () => { if (intervalId) { clearInterval(intervalId); intervalId = null; } };
+
+  const io = new IntersectionObserver((entries) => {
+    if (entries[0].isIntersecting) start(); else stop();
+  }, { threshold: 0.1 });
+  io.observe(screens[0].closest('.hero-mockups') || screens[0]);
 })();
 
 // Auto-rotate the active principle card on home (Dub-style focus cycle)
