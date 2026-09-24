@@ -382,6 +382,17 @@ img {
   text-wrap: balance;
 }
 
+.hero-subtitle {
+  margin-top: 28px;
+  font-family: var(--font-jp);
+  font-weight: 400;
+  font-size: clamp(14px, 1.25vw, 17px);
+  line-height: 1.9;
+  letter-spacing: 0.04em;
+  color: var(--color-text-soft);
+  text-shadow: 0 0 16px rgba(255, 255, 255, 0.9), 0 0 32px rgba(255, 255, 255, 0.7);
+}
+
 .keep-together { white-space: nowrap; }
 
 
