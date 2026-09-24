@@ -18,118 +18,120 @@
       padding: 96px 104px 120px;
     }
 
-    .app-entry {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 80px;
-      padding: 72px 0;
+    .app-group {
+      padding: 56px 0;
       border-top: 1px solid var(--color-border);
-      align-items: center;
     }
 
-    .app-entry:first-of-type { border-top: none; padding-top: 32px; }
+    .app-group:first-of-type { border-top: none; padding-top: 16px; }
 
-    .app-entry:nth-of-type(even) .app-visual { order: 2; }
+    .app-group-head {
+      display: flex;
+      align-items: baseline;
+      gap: 16px;
+      margin-bottom: 28px;
+    }
 
-    .app-visual {
-      aspect-ratio: 4 / 3;
-      background: var(--color-surface-hover);
+    .app-group-title {
+      font-family: var(--font-jp);
+      font-weight: 600;
+      font-size: clamp(20px, 2.2vw, 26px);
+      letter-spacing: 0.02em;
+      color: var(--color-text);
+    }
+
+    .app-group-en {
+      font-family: var(--font-display);
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--color-text-muted);
+    }
+
+    .app-card-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .app-card {
+      display: flex;
+      align-items: flex-start;
+      gap: 18px;
+      padding: 22px;
       border: 1px solid var(--color-border);
       border-radius: var(--radius-lg);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      overflow: hidden;
-      position: relative;
+      background: var(--color-surface);
+      color: inherit;
+      text-decoration: none;
+      transition: border-color var(--motion-fast), background var(--motion-fast), transform var(--motion-fast);
     }
 
-    .app-visual img {
-      width: 38%;
-      height: auto;
-      border-radius: 22%;
-      box-shadow: 0 24px 48px -20px rgba(0, 0, 0, 0.18);
+    .app-card:hover {
+      border-color: var(--color-border-strong);
+      background: var(--color-surface-hover);
+      transform: translateY(-2px);
     }
 
-
-    .app-meta-num {
-      font-family: var(--font-pixel);
-      font-size: 11px;
-      letter-spacing: 0.2em;
-      color: var(--color-text-muted);
-      margin-bottom: 16px;
+    .app-card img {
+      flex: none;
+      width: 64px;
+      height: 64px;
+      border-radius: 22.5%;
+      box-shadow: var(--shadow-float);
     }
 
-    .app-meta-badges {
-      display: flex;
-      gap: 8px;
-      margin-bottom: 20px;
-    }
-
-    .app-meta-title {
+    .app-card-name {
       font-family: var(--font-jp);
-      font-weight: 400;
-      font-size: clamp(26px, 3.2vw, 40px);
-      letter-spacing: 0.05em;
-      line-height: 1.25;
+      font-weight: 600;
+      font-size: 15px;
+      line-height: 1.45;
+      letter-spacing: 0.01em;
       color: var(--color-text);
-      margin-bottom: 24px;
+      margin-bottom: 6px;
     }
 
-    .app-meta-desc {
+    .app-card-desc {
       font-family: var(--font-jp);
-      font-weight: 300;
-      font-size: clamp(14px, 1.4vw, 16px);
-      line-height: 2;
-      letter-spacing: 0.04em;
-      color: var(--color-text);
-      margin-bottom: 28px;
-      max-width: 480px;
-    }
-
-    .app-features {
-      list-style: none;
-      padding: 0;
-      margin: 0 0 32px;
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-      max-width: 480px;
-    }
-
-    .app-features li {
-      font-family: var(--font-jp);
-      font-weight: 400;
-      font-size: 13px;
-      line-height: 1.6;
+      font-size: 12.5px;
+      line-height: 1.7;
       letter-spacing: 0.02em;
       color: var(--color-text-muted);
-      padding-left: 20px;
-      position: relative;
+      margin-bottom: 10px;
     }
 
-    .app-features li::before {
-      content: '─';
-      position: absolute;
-      left: 0;
-      color: var(--color-border-strong);
-      font-family: var(--font-body);
+    .app-card-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: var(--font-display);
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--color-text);
     }
+
+    .app-card-link .arrow { transition: transform var(--motion-fast); }
+    .app-card:hover .app-card-link .arrow { transform: translateX(3px); }
 
     @media (max-width: 1024px) {
       main.apps-main {
         padding-left: 80px;
         padding-right: 80px;
       }
+      .app-card-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     }
 
     @media (max-width: 720px) {
       main.apps-main { padding: 72px 40px 80px; }
-      .app-entry {
-        grid-template-columns: 1fr;
-        gap: 32px;
-        padding: 48px 0;
-      }
-      .app-entry:nth-of-type(even) .app-visual { order: 0; }
+      .app-group { padding: 40px 0; }
+      .app-card-grid { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 480px) {
+      main.apps-main { padding: 56px 16px 72px; }
+      .app-card { padding: 18px; gap: 14px; }
+      .app-card img { width: 56px; height: 56px; }
     }
   </style>
 </head>
@@ -158,109 +160,149 @@
   <div class="content-shell">
     <main class="apps-main">
     <p class="subpage-intro">
-      複数の単語帳アプリと制作ツールを開発・運営しています。
+      語学試験ごとの単語帳アプリを開発・運営しています。すべて iOS（App Store）で配信中です。
     </p>
 
-    <article class="app-entry reveal">
-      <div class="app-visual">
-        <img src="Device%20Bezels/topik8000-icon.png" alt="TOPIK韓国語単語帳8000">
+    <section class="app-group reveal">
+      <div class="app-group-head">
+        <h2 class="app-group-title">韓国語</h2>
+        <span class="app-group-en">Korean</span>
       </div>
-      <div class="app-meta">
-        <div class="app-meta-num">01</div>
-        <div class="app-meta-badges">
-          <span class="badge badge-live">iOS</span>
-        </div>
-        <h2 class="app-meta-title">TOPIK韓国語単語帳8000</h2>
-        <p class="app-meta-desc">
-          TOPIK（韓国語能力試験）合格に必要な韓国語単語 8,000 語を収録。音声と習熟度管理機能で、効率よく記憶に定着させます。
-        </p>
-        <ul class="app-features">
-          <li>TOPIK 1〜6級の頻出 8,000 語を網羅</li>
-          <li>全単語・例文の音声収録（オフライン再生）</li>
-          <li>習熟度の自動管理とレベル別フィルタ</li>
-          <li>例文・派生語・関連語の収録</li>
-        </ul>
-        <a class="btn btn-secondary" href="https://apps.apple.com/us/app/topik%E9%9F%93%E5%9B%BD%E8%AA%9E%E5%8D%98%E8%AA%9E%E5%B8%B38000/id6760393514" target="_blank" rel="noopener">
-          App Store で見る <span class="arrow">→</span>
+      <div class="app-card-grid">
+        <a class="app-card" href="https://apps.apple.com/jp/app/id6760393514" target="_blank" rel="noopener">
+          <img src="app-icons/topik8000.png" alt="" width="256" height="256" loading="lazy">
+          <div>
+            <h3 class="app-card-name">TOPIK韓国語単語帳8000</h3>
+            <p class="app-card-desc">TOPIK 1〜6級 頻出8,000語・音声付き・聞き流し</p>
+            <span class="app-card-link">App Store で見る <span class="arrow">→</span></span>
+          </div>
+        </a>
+        <a class="app-card" href="https://apps.apple.com/jp/app/id6779498984" target="_blank" rel="noopener">
+          <img src="app-icons/hanken6000.png" alt="" width="256" height="256" loading="lazy">
+          <div>
+            <h3 class="app-card-name">ハン検韓国語単語帳6000</h3>
+            <p class="app-card-desc">ハングル能力検定 5級〜1級・TOPIK対策にも</p>
+            <span class="app-card-link">App Store で見る <span class="arrow">→</span></span>
+          </div>
         </a>
       </div>
-    </article>
+    </section>
 
-    <article class="app-entry reveal">
-      <div class="app-visual">
-        <img src="Device%20Bezels/hsk11092-icon.png" alt="HSK中国語単語帳11092">
+    <section class="app-group reveal">
+      <div class="app-group-head">
+        <h2 class="app-group-title">中国語</h2>
+        <span class="app-group-en">Chinese</span>
       </div>
-      <div class="app-meta">
-        <div class="app-meta-num">02</div>
-        <div class="app-meta-badges">
-          <span class="badge badge-live">iOS</span>
-        </div>
-        <h2 class="app-meta-title">HSK中国語単語帳11092</h2>
-        <p class="app-meta-desc">
-          HSK（中国語検定）の出題範囲をカバーする中国語単語 11,092 語を収録。音声と習熟度管理機能で、効率よく記憶に定着させます。
-        </p>
-        <ul class="app-features">
-          <li>HSK 1〜9級の全 11,092 語を網羅</li>
-          <li>全単語・例文の音声収録（オフライン再生）</li>
-          <li>習熟度の自動管理とレベル別フィルタ</li>
-          <li>例文・類義語・反意語・関連語の収録</li>
-        </ul>
-        <a class="btn btn-secondary" href="https://apps.apple.com/jp/app/id6770573656" target="_blank" rel="noopener">
-          App Store で見る <span class="arrow">→</span>
+      <div class="app-card-grid">
+        <a class="app-card" href="https://apps.apple.com/jp/app/id6770573656" target="_blank" rel="noopener">
+          <img src="app-icons/hsk11092.png" alt="" width="256" height="256" loading="lazy">
+          <div>
+            <h3 class="app-card-name">HSK中国語単語帳11092</h3>
+            <p class="app-card-desc">HSK 1〜9級 全11,092語・音声付き・聞き流し</p>
+            <span class="app-card-link">App Store で見る <span class="arrow">→</span></span>
+          </div>
+        </a>
+        <a class="app-card" href="https://apps.apple.com/jp/app/id6779827178" target="_blank" rel="noopener">
+          <img src="app-icons/chuken8000.png" alt="" width="256" height="256" loading="lazy">
+          <div>
+            <h3 class="app-card-name">中検中国語単語帳8000</h3>
+            <p class="app-card-desc">中国語検定 準4〜1級 頻出8,000語・音声付き</p>
+            <span class="app-card-link">App Store で見る <span class="arrow">→</span></span>
+          </div>
+        </a>
+        <a class="app-card" href="https://apps.apple.com/jp/app/id6779827390" target="_blank" rel="noopener">
+          <img src="app-icons/tocfl8000.png" alt="" width="256" height="256" loading="lazy">
+          <div>
+            <h3 class="app-card-name">TOCFL台湾華語単語帳8000</h3>
+            <p class="app-card-desc">TOCFL 準備〜流利級 繁体字・台湾華語 8,000語</p>
+            <span class="app-card-link">App Store で見る <span class="arrow">→</span></span>
+          </div>
         </a>
       </div>
-    </article>
+    </section>
 
-    <article class="app-entry reveal">
-      <div class="app-visual">
-        <img src="Device%20Bezels/futsuken9000-icon.png" alt="仏検フランス語単語帳9000">
+    <section class="app-group reveal">
+      <div class="app-group-head">
+        <h2 class="app-group-title">英語</h2>
+        <span class="app-group-en">English</span>
       </div>
-      <div class="app-meta">
-        <div class="app-meta-num">03</div>
-        <div class="app-meta-badges">
-          <span class="badge badge-live">iOS</span>
-        </div>
-        <h2 class="app-meta-title">仏検フランス語単語帳9000</h2>
-        <p class="app-meta-desc">
-          実用フランス語技能検定（仏検）の出題範囲をカバーするフランス語単語 9,000 語を収録。音声と習熟度管理機能で、効率よく記憶に定着させます。
-        </p>
-        <ul class="app-features">
-          <li>仏検 5〜1級の全 9,000 語を網羅</li>
-          <li>全単語・例文の音声収録（オフライン再生）</li>
-          <li>習熟度の自動管理とレベル別フィルタ</li>
-          <li>例文・類義語・反意語・関連語の収録</li>
-        </ul>
-        <a class="btn btn-secondary" href="https://apps.apple.com/jp/app/id6772685181" target="_blank" rel="noopener">
-          App Store で見る <span class="arrow">→</span>
+      <div class="app-card-grid">
+        <a class="app-card" href="https://apps.apple.com/jp/app/id6772321226" target="_blank" rel="noopener">
+          <img src="app-icons/ielts4000.png" alt="" width="256" height="256" loading="lazy">
+          <div>
+            <h3 class="app-card-name">IELTS英単語帳4000</h3>
+            <p class="app-card-desc">IELTS頻出4,000語・音声付き・聞き流し</p>
+            <span class="app-card-link">App Store で見る <span class="arrow">→</span></span>
+          </div>
+        </a>
+        <a class="app-card" href="https://apps.apple.com/jp/app/id6773905381" target="_blank" rel="noopener">
+          <img src="app-icons/toefl5000.png" alt="" width="256" height="256" loading="lazy">
+          <div>
+            <h3 class="app-card-name">TOEFL英単語帳5000</h3>
+            <p class="app-card-desc">TOEFL iBT 頻出5,000語・音声付き・聞き流し</p>
+            <span class="app-card-link">App Store で見る <span class="arrow">→</span></span>
+          </div>
         </a>
       </div>
-    </article>
+    </section>
 
-    <article class="app-entry reveal">
-      <div class="app-visual">
-        <img src="icon-sidekit.svg" alt="Sidekit">
+    <section class="app-group reveal">
+      <div class="app-group-head">
+        <h2 class="app-group-title">ヨーロッパの言語</h2>
+        <span class="app-group-en">European languages</span>
       </div>
-      <div class="app-meta">
-        <div class="app-meta-num">04</div>
-        <div class="app-meta-badges">
-          <span class="badge badge-live">Web</span>
-        </div>
-        <h2 class="app-meta-title">Sidekit</h2>
-        <p class="app-meta-desc">
-          ブラウザ完結型のクリエイティブツール集。動画・画像・GIF・APNGの変換／編集／圧縮。
-        </p>
-        <ul class="app-features">
-          <li>動画変換（mp4 / webm / gif / apng）</li>
-          <li>画像変換・圧縮（jpg / png / webp / svg）</li>
-          <li>ブラウザ完結（アップロード不要、データ送信なし）</li>
-          <li>無料・登録不要</li>
-        </ul>
-        <a class="btn btn-secondary" href="https://sidekit.tools/" target="_blank" rel="noopener">
-          サイトを開く <span class="arrow">→</span>
+      <div class="app-card-grid">
+        <a class="app-card" href="https://apps.apple.com/jp/app/id6772685181" target="_blank" rel="noopener">
+          <img src="app-icons/futsuken9000.png" alt="" width="256" height="256" loading="lazy">
+          <div>
+            <h3 class="app-card-name">仏検フランス語単語帳9000</h3>
+            <p class="app-card-desc">仏検 5〜1級 頻出9,000語・音声付き・聞き流し</p>
+            <span class="app-card-link">App Store で見る <span class="arrow">→</span></span>
+          </div>
+        </a>
+        <a class="app-card" href="https://apps.apple.com/jp/app/id6773996871" target="_blank" rel="noopener">
+          <img src="app-icons/dokken3000.png" alt="" width="256" height="256" loading="lazy">
+          <div>
+            <h3 class="app-card-name">独検ドイツ語単語帳8000</h3>
+            <p class="app-card-desc">独検 5〜1級 頻出8,000語・音声付き・聞き流し</p>
+            <span class="app-card-link">App Store で見る <span class="arrow">→</span></span>
+          </div>
+        </a>
+        <a class="app-card" href="https://apps.apple.com/jp/app/id6779826833" target="_blank" rel="noopener">
+          <img src="app-icons/iken3000.png" alt="" width="256" height="256" loading="lazy">
+          <div>
+            <h3 class="app-card-name">伊検イタリア語単語帳8000</h3>
+            <p class="app-card-desc">伊検 5〜1級 頻出8,000語・音声付き・聞き流し</p>
+            <span class="app-card-link">App Store で見る <span class="arrow">→</span></span>
+          </div>
+        </a>
+        <a class="app-card" href="https://apps.apple.com/jp/app/id6779828007" target="_blank" rel="noopener">
+          <img src="app-icons/dele6000.png" alt="" width="256" height="256" loading="lazy">
+          <div>
+            <h3 class="app-card-name">DELEスペイン語単語帳6000</h3>
+            <p class="app-card-desc">DELE A1〜C1 頻出6,000語・音声付き・聞き流し</p>
+            <span class="app-card-link">App Store で見る <span class="arrow">→</span></span>
+          </div>
         </a>
       </div>
-    </article>
+    </section>
 
+    <section class="app-group reveal">
+      <div class="app-group-head">
+        <h2 class="app-group-title">日本語（海外の学習者向け）</h2>
+        <span class="app-group-en">Japanese</span>
+      </div>
+      <div class="app-card-grid">
+        <a class="app-card" href="https://apps.apple.com/jp/app/id6779828533" target="_blank" rel="noopener">
+          <img src="app-icons/jlpt10000.png" alt="" width="256" height="256" loading="lazy">
+          <div>
+            <h3 class="app-card-name">JLPT10000 日本語単語帳</h3>
+            <p class="app-card-desc">JLPT N5-N1 10,000語 音声付き</p>
+            <span class="app-card-link">App Store で見る <span class="arrow">→</span></span>
+          </div>
+        </a>
+      </div>
+    </section>
   </main>
   </div>
 
@@ -283,10 +325,8 @@
       <div class="footer-col">
         <div class="footer-col-title">Products</div>
         <ul>
-          <li><a href="https://apps.apple.com/us/app/topik%E9%9F%93%E5%9B%BD%E8%AA%9E%E5%8D%98%E8%AA%9E%E5%B8%B38000/id6760393514" target="_blank" rel="noopener">TOPIK韓国語単語帳8000</a></li>
-          <li><a href="https://apps.apple.com/jp/app/id6770573656" target="_blank" rel="noopener">HSK中国語単語帳11092</a></li>
-          <li><a href="https://apps.apple.com/jp/app/id6772685181" target="_blank" rel="noopener">仏検フランス語単語帳9000</a></li>
-          <li><a href="https://sidekit.tools/" target="_blank" rel="noopener">Sidekit</a></li>
+          <li><a href="apps">単語帳アプリ一覧</a></li>
+          <li><a href="https://apps.apple.com/jp/developer/juuvo/id1850244679" target="_blank" rel="noopener">App Store（JUUVO）</a></li>
         </ul>
       </div>
       <div class="footer-col">
