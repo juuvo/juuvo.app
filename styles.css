@@ -47,7 +47,12 @@ ul { list-style: none; }
   --color-surface: #ffffff;
   --color-surface-subtle: #fafafa;
   --color-surface-hover: #fafafa;
-  --color-accent: #c72238;
+  --color-accent: #000000;
+  --color-surface-muted: #f5f5f3;
+  --color-footer-bg: #111111;
+  --color-footer-text: rgba(255, 255, 255, 0.62);
+  --color-footer-strong: #ffffff;
+  --color-footer-line: rgba(255, 255, 255, 0.12);
 
   /* Radius */
   --radius-sm: 8px;
@@ -252,7 +257,6 @@ img {
   position: relative;
   overflow: hidden;
   padding: 168px 32px 96px;
-  border-bottom: 1px solid var(--color-border);
 }
 
 .page-hero-inner {
@@ -600,28 +604,10 @@ img {
   .page-hero { padding: 128px 24px 64px; }
 }
 
-/* === Content shell (subpage container with vertical guides) === */
+/* === Content shell (subpage body: a muted surface below the white page hero) === */
 .content-shell {
   position: relative;
-}
-
-.content-shell::before,
-.content-shell::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  width: 1px;
-  background: var(--color-border);
-  pointer-events: none;
-}
-
-.content-shell::before { left: max(32px, calc(50% - var(--container-half))); }
-.content-shell::after  { right: max(32px, calc(50% - var(--container-half))); }
-
-@media (max-width: 720px) {
-  .content-shell::before { left: 24px; }
-  .content-shell::after { right: 24px; }
+  background: var(--color-surface-muted);
 }
 
 /* === Section head (Cal/Dub style — for in-page sections) === */
@@ -667,22 +653,7 @@ img {
 .home-section {
   position: relative;
   padding: var(--section-y) 32px;
-  border-top: 1px solid var(--color-border);
 }
-
-.home-section::before,
-.home-section::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  width: 1px;
-  background: var(--color-border);
-  pointer-events: none;
-}
-
-.home-section::before { left: max(32px, calc(50% - var(--container-half))); }
-.home-section::after  { right: max(32px, calc(50% - var(--container-half))); }
 
 .home-section-inner {
   position: relative;
@@ -701,8 +672,6 @@ img {
     padding: var(--section-y-mobile) 24px;
   }
 
-  .home-section::before { left: 24px; }
-  .home-section::after { right: 24px; }
   .home-section-inner { padding: 0 var(--gutter-mobile); }
 }
 
@@ -712,14 +681,13 @@ img {
     padding-right: 16px;
   }
 
-  .home-section::before { left: 16px; }
-  .home-section::after { right: 16px; }
   .home-section-inner { padding: 0; }
 }
 
 /* === Works: vocab series grid === */
 .home-feature-section {
   padding-top: 128px;
+  background: var(--color-surface-muted);
 }
 
 /* Full-bleed band: breaks out of the centered container to the viewport edges */
@@ -730,8 +698,6 @@ img {
   margin-left: calc(50% - 50vw);
   padding: 48px 0 40px;
   background: var(--color-bg);
-  border-top: 1px solid var(--color-border);
-  border-bottom: 1px solid var(--color-border);
 }
 
 .marquee {
@@ -809,9 +775,9 @@ img {
   align-items: center;
   gap: 28px;
   padding: 28px 32px;
-  border: 1px solid var(--color-border);
+  border: 1px solid transparent;
   border-radius: var(--radius-lg);
-  background: var(--color-surface);
+  background: var(--color-surface-muted);
   color: inherit;
   text-decoration: none;
   transition: border-color var(--motion-fast), background var(--motion-fast), transform var(--motion-fast);
@@ -819,7 +785,7 @@ img {
 
 .media-card:hover {
   border-color: var(--color-border-strong);
-  background: var(--color-surface-hover);
+  background: #efefec;
   transform: translateY(-2px);
 }
 
@@ -1294,9 +1260,9 @@ img {
 /* === Footer (multi-column, shared) === */
 footer {
   padding: 96px 32px 32px;
-  border-top: 1px solid var(--color-border);
+  background: var(--color-footer-bg);
   font-family: var(--font-body);
-  color: var(--color-text-muted);
+  color: var(--color-footer-text);
 }
 
 .footer-grid {
@@ -1307,7 +1273,7 @@ footer {
   display: grid;
   grid-template-columns: 2fr 1fr 1fr 1fr;
   gap: 48px;
-  border-bottom: 1px solid var(--color-border);
+  border-bottom: 1px solid var(--color-footer-line);
 }
 
 .footer-brand-col {
@@ -1320,7 +1286,7 @@ footer {
   display: block;
   width: 96px;
   height: 24px;
-  background-color: var(--color-text);
+  background-color: var(--color-footer-strong);
   mask: url('logo.svg') no-repeat center / contain;
   -webkit-mask: url('logo.svg') no-repeat center / contain;
 }
@@ -1331,7 +1297,7 @@ footer {
   font-size: 13px;
   line-height: 1.7;
   letter-spacing: 0.02em;
-  color: var(--color-text-muted);
+  color: var(--color-footer-text);
   max-width: 22em;
 }
 
@@ -1349,7 +1315,7 @@ footer {
   font-size: 11px;
   letter-spacing: 0.22em;
   text-transform: uppercase;
-  color: var(--color-text);
+  color: var(--color-footer-strong);
   margin-bottom: 22px;
 }
 
@@ -1368,14 +1334,14 @@ footer {
 
 .footer-col a,
 .footer-col li > span {
-  color: var(--color-text-muted);
+  color: var(--color-footer-text);
   text-decoration: none;
   transition: color 0.15s ease;
 }
 
-.footer-col a:hover { color: var(--color-text); }
+.footer-col a:hover { color: var(--color-footer-strong); }
 
-.footer-col li > span { color: var(--color-text-faint); }
+.footer-col li > span { color: rgba(255, 255, 255, 0.42); }
 
 .footer-bottom {
   width: 100%;
@@ -1388,7 +1354,7 @@ footer {
   font-family: var(--font-body);
   font-size: 11px;
   letter-spacing: 0.06em;
-  color: var(--color-text-faint);
+  color: rgba(255, 255, 255, 0.42);
 }
 
 @media (max-width: 1024px) {
