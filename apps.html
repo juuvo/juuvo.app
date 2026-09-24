@@ -18,36 +18,15 @@
       padding: 96px 104px 120px;
     }
 
-    .app-group {
-      padding: 56px 0;
-      border-top: 1px solid var(--color-border);
-    }
+    
 
-    .app-group:first-of-type { border-top: none; padding-top: 16px; }
+    
 
-    .app-group-head {
-      display: flex;
-      align-items: baseline;
-      gap: 16px;
-      margin-bottom: 28px;
-    }
+    
 
-    .app-group-title {
-      font-family: var(--font-jp);
-      font-weight: 600;
-      font-size: clamp(20px, 2.2vw, 26px);
-      letter-spacing: 0.02em;
-      color: var(--color-text);
-    }
+    
 
-    .app-group-en {
-      font-family: var(--font-display);
-      font-size: 11px;
-      font-weight: 500;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
-      color: var(--color-text-muted);
-    }
+    
 
     .app-card-grid {
       display: grid;
@@ -124,7 +103,6 @@
 
     @media (max-width: 720px) {
       main.apps-main { padding: 72px 40px 80px; }
-      .app-group { padding: 40px 0; }
       .app-card-grid { grid-template-columns: 1fr; }
     }
 
@@ -163,12 +141,7 @@
       語学試験ごとの単語帳アプリを開発・運営しています。すべて iOS（App Store）で配信中です。
     </p>
 
-    <section class="app-group reveal">
-      <div class="app-group-head">
-        <h2 class="app-group-title">韓国語</h2>
-        <span class="app-group-en">Korean</span>
-      </div>
-      <div class="app-card-grid">
+    <div class="app-card-grid app-card-grid-all reveal">
         <a class="app-card" href="https://apps.apple.com/jp/app/id6760393514" target="_blank" rel="noopener">
           <img src="app-icons/topik8000.png" alt="" width="256" height="256" loading="lazy">
           <div>
@@ -185,15 +158,6 @@
             <span class="app-card-link">App Store で見る <span class="arrow">→</span></span>
           </div>
         </a>
-      </div>
-    </section>
-
-    <section class="app-group reveal">
-      <div class="app-group-head">
-        <h2 class="app-group-title">中国語</h2>
-        <span class="app-group-en">Chinese</span>
-      </div>
-      <div class="app-card-grid">
         <a class="app-card" href="https://apps.apple.com/jp/app/id6770573656" target="_blank" rel="noopener">
           <img src="app-icons/hsk11092.png" alt="" width="256" height="256" loading="lazy">
           <div>
@@ -218,15 +182,6 @@
             <span class="app-card-link">App Store で見る <span class="arrow">→</span></span>
           </div>
         </a>
-      </div>
-    </section>
-
-    <section class="app-group reveal">
-      <div class="app-group-head">
-        <h2 class="app-group-title">英語</h2>
-        <span class="app-group-en">English</span>
-      </div>
-      <div class="app-card-grid">
         <a class="app-card" href="https://apps.apple.com/jp/app/id6772321226" target="_blank" rel="noopener">
           <img src="app-icons/ielts4000.png" alt="" width="256" height="256" loading="lazy">
           <div>
@@ -243,15 +198,6 @@
             <span class="app-card-link">App Store で見る <span class="arrow">→</span></span>
           </div>
         </a>
-      </div>
-    </section>
-
-    <section class="app-group reveal">
-      <div class="app-group-head">
-        <h2 class="app-group-title">ヨーロッパの言語</h2>
-        <span class="app-group-en">European languages</span>
-      </div>
-      <div class="app-card-grid">
         <a class="app-card" href="https://apps.apple.com/jp/app/id6772685181" target="_blank" rel="noopener">
           <img src="app-icons/futsuken9000.png" alt="" width="256" height="256" loading="lazy">
           <div>
@@ -284,15 +230,6 @@
             <span class="app-card-link">App Store で見る <span class="arrow">→</span></span>
           </div>
         </a>
-      </div>
-    </section>
-
-    <section class="app-group reveal">
-      <div class="app-group-head">
-        <h2 class="app-group-title">日本語（海外の学習者向け）</h2>
-        <span class="app-group-en">Japanese</span>
-      </div>
-      <div class="app-card-grid">
         <a class="app-card" href="https://apps.apple.com/jp/app/id6779828533" target="_blank" rel="noopener">
           <img src="app-icons/jlpt10000.png" alt="" width="256" height="256" loading="lazy">
           <div>
@@ -301,8 +238,8 @@
             <span class="app-card-link">App Store で見る <span class="arrow">→</span></span>
           </div>
         </a>
-      </div>
-    </section>
+    </div>
+
   </main>
   </div>
 
