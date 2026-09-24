@@ -796,6 +796,17 @@ img {
   font-feature-settings: "palt" 1;
 }
 
+.home-philosophy-copy p.home-philosophy-latin {
+  font-family: var(--font-jp-serif);
+  font-style: italic;
+  font-weight: 300;
+  font-size: clamp(15px, 1.6vw, 18px);
+  line-height: 1.7;
+  letter-spacing: 0.02em;
+  color: var(--color-text-muted);
+  margin: -8px 0 32px;
+}
+
 
 @media (max-width: 720px) {
   .home-feature-section {
