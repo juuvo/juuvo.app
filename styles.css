@@ -1414,6 +1414,16 @@ footer {
   color: rgba(255, 255, 255, 0.42);
 }
 
+.footer-legal-link {
+  color: rgba(255, 255, 255, 0.42);
+  font-family: var(--font-jp);
+  font-size: 11px;
+  text-decoration: none;
+  transition: color 0.15s ease;
+}
+
+.footer-legal-link:hover { color: var(--color-footer-strong); }
+
 @media (max-width: 1024px) {
   .footer-grid { padding: 0 var(--gutter-tablet) 64px; }
   .footer-bottom { padding: 0 var(--gutter-tablet); }
