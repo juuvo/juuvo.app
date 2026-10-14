@@ -21,7 +21,7 @@
 </head>
 <body>
 <h1>利用規約</h1>
-<p>最終更新日：2026年6月21日</p>
+<p>最終更新日：2026年10月14日</p>
 <p>本利用規約は、JUUVOが提供する「ハン検韓国語単語帳6000」の利用条件を定めるものです。本アプリをご利用いただくことで、本規約に同意したものとみなします。</p>
 
 <div class="trademark">
@@ -53,7 +53,7 @@
   <tr><td>国立国語院 学習用語彙</td><td>『한국어 학습용 어휘 목록』، 국립국어원 (NIKL、A/B/C等級)</td><td>公開研究資料（出典明記）</td></tr>
   <tr><td>krdict（韓国語基礎辞典）</td><td>한국어기초사전، 국립국어원</td><td>CC BY-SA 2.0 KR</td></tr>
   <tr><td>標準国語大辞典</td><td>표준국어대사전، 국립국어원</td><td>公開辞書資料（出典明記）</td></tr>
-  <tr><td>wordfreq</td><td>Robyn Speer et al.（多言語コーパス統合）</td><td>MIT License</td></tr>
+  <tr><td>wordfreq</td><td>Robyn Speer et al.（多言語コーパス統合）</td><td>Apache License 2.0（データは CC BY-SA 4.0）</td></tr>
   <tr><td>Leipzig Corpora Collection</td><td>Universität Leipzig（News・Wikipedia・Web）</td><td>CC BY 4.0</td></tr>
 </table>
 <p>本アプリの単語リストは、上記の公開データソースを重み付けで統計分析し、ハン検 (ハングル能力検定) の級別出題範囲に対応する6,000語として独自に選定・編集したものです。</p>
@@ -70,29 +70,27 @@
 <h2>オープンソースライセンス</h2>
 <p>本アプリは以下のオープンソースソフトウェアを利用しています（語彙データの選定・編集に用いたビルド時ツールであり、アプリ本体には同梱されません）。</p>
 <ul class="oss-list">
-  <li><strong>wordfreq</strong> — MIT License（コーパス頻度データの集計に使用、ビルド時のみ）</li>
+  <li><strong>wordfreq</strong> — Apache License 2.0（データは CC BY-SA 4.0。コーパス頻度データの集計に使用、ビルド時のみ）</li>
   <li><strong>openpyxl</strong> — MIT License（マスタデータの処理に使用、ビルド時のみ）</li>
 </ul>
-<p><strong>wordfreq — MIT License</strong></p>
-<div class="license-text">Copyright (c) 2015-2021 Robyn Speer and Luminoso Technologies, Inc.
+<p><strong>wordfreq — Apache License 2.0（データは CC BY-SA 4.0）</strong></p>
+<div class="license-text">Copyright (c) Robyn Speer
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
 
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
+    http://www.apache.org/licenses/LICENSE-2.0
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.</div>
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+
+The wordfreq data files are licensed under the Creative Commons
+Attribution-ShareAlike 4.0 license (https://creativecommons.org/licenses/by-sa/4.0/).
+</div>
 
 <h2>音声データについて</h2>
 <p>本アプリに同梱されている音声データ（mp3）は <a href="https://cloud.google.com/text-to-speech">Google Cloud Text-to-Speech</a>（Wavenet / Chirp3-HD）を使用して事前生成したものです。音声データの配布はサービス利用契約に基づきます。</p>
